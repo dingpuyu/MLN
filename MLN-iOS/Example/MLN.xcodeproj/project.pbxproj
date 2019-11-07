@@ -40,7 +40,6 @@
 		B29500BA2371A68300F48F09 /* MLNGalleryHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B29500B92371A68300F48F09 /* MLNGalleryHomeViewController.m */; };
 		B29500BD2371AFCB00F48F09 /* MLNGalleryDiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B29500BC2371AFCB00F48F09 /* MLNGalleryDiscoverViewController.m */; };
 		B29500C02371B11E00F48F09 /* MLNGalleryPlusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B29500BF2371B11E00F48F09 /* MLNGalleryPlusViewController.m */; };
-		B29500C32371B13F00F48F09 /* MLNGalleryMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B29500C22371B13F00F48F09 /* MLNGalleryMessageViewController.m */; };
 		B29500CA23725EB800F48F09 /* UIImage+MLNResize.m in Sources */ = {isa = PBXBuildFile; fileRef = B29500C923725EB800F48F09 /* UIImage+MLNResize.m */; };
 		B29500D62372627000F48F09 /* MLNNativeTabSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = B29500CD2372627000F48F09 /* MLNNativeTabSegmentView.m */; };
 		B29500D82372627000F48F09 /* MLNNativeBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = B29500CF2372627000F48F09 /* MLNNativeBadgeView.m */; };
@@ -67,6 +66,17 @@
 		B295012823750F8900F48F09 /* MLNDiscoverAblbumDeatilHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B295012723750F8900F48F09 /* MLNDiscoverAblbumDeatilHeaderView.m */; };
 		B2D0AB85236C1F0A00B1D349 /* gallery in Resources */ = {isa = PBXBuildFile; fileRef = B2D0AB84236C1F0A00B1D349 /* gallery */; };
 		B2D0ABB52370136000B1D349 /* MLNGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D0ABB42370136000B1D349 /* MLNGalleryViewController.m */; };
+		FADC40A223756AD5002249D4 /* MLNGalleryMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FADC409223756AD4002249D4 /* MLNGalleryMessageViewController.m */; };
+		FADC40A323756AD5002249D4 /* MLNGalleryMessageBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FADC409423756AD4002249D4 /* MLNGalleryMessageBaseCell.m */; };
+		FADC40A423756AD5002249D4 /* MLNGalleryMessageDescCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FADC409723756AD4002249D4 /* MLNGalleryMessageDescCell.m */; };
+		FADC40A523756AD5002249D4 /* MLNGalleryMessageBaseCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FADC409923756AD4002249D4 /* MLNGalleryMessageBaseCellModel.m */; };
+		FADC40A623756AD5002249D4 /* MLNGalleryMessageToolCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FADC409B23756AD4002249D4 /* MLNGalleryMessageToolCellModel.m */; };
+		FADC40A723756AD5002249D4 /* MLNGalleryMessageDescCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FADC409D23756AD4002249D4 /* MLNGalleryMessageDescCellModel.m */; };
+		FADC40A823756AD5002249D4 /* MLNGalleryMessageToolCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FADC40A023756AD4002249D4 /* MLNGalleryMessageToolCell.m */; };
+		FADC40B123756B03002249D4 /* MLNGalleryMineBottomPage.m in Sources */ = {isa = PBXBuildFile; fileRef = FADC40AA23756B03002249D4 /* MLNGalleryMineBottomPage.m */; };
+		FADC40B223756B03002249D4 /* MLNGalleryMineBottomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FADC40AB23756B03002249D4 /* MLNGalleryMineBottomCell.m */; };
+		FADC40B323756B03002249D4 /* MLNGalleryMineBottomCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FADC40AE23756B03002249D4 /* MLNGalleryMineBottomCellModel.m */; };
+		FADC40B723756B0B002249D4 /* MLNGalleryMineInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FADC40B523756B0A002249D4 /* MLNGalleryMineInfoViewModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,8 +145,6 @@
 		B29500BC2371AFCB00F48F09 /* MLNGalleryDiscoverViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLNGalleryDiscoverViewController.m; sourceTree = "<group>"; };
 		B29500BE2371B11E00F48F09 /* MLNGalleryPlusViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLNGalleryPlusViewController.h; sourceTree = "<group>"; };
 		B29500BF2371B11E00F48F09 /* MLNGalleryPlusViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLNGalleryPlusViewController.m; sourceTree = "<group>"; };
-		B29500C12371B13F00F48F09 /* MLNGalleryMessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLNGalleryMessageViewController.h; sourceTree = "<group>"; };
-		B29500C22371B13F00F48F09 /* MLNGalleryMessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLNGalleryMessageViewController.m; sourceTree = "<group>"; };
 		B29500C823725EB800F48F09 /* UIImage+MLNResize.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+MLNResize.h"; sourceTree = "<group>"; };
 		B29500C923725EB800F48F09 /* UIImage+MLNResize.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MLNResize.m"; sourceTree = "<group>"; };
 		B29500CD2372627000F48F09 /* MLNNativeTabSegmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLNNativeTabSegmentView.m; sourceTree = "<group>"; };
@@ -194,6 +202,28 @@
 		C0FB2CAC8F9592C3092ACF62 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		F236AA5C6B666135B994F09B /* Pods-MLN_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLN_Example.debug.xcconfig"; path = "Target Support Files/Pods-MLN_Example/Pods-MLN_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		F449C1D4FDA5182F0D579269 /* libPods-MLN_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MLN_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FADC409223756AD4002249D4 /* MLNGalleryMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLNGalleryMessageViewController.m; sourceTree = "<group>"; };
+		FADC409423756AD4002249D4 /* MLNGalleryMessageBaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLNGalleryMessageBaseCell.m; sourceTree = "<group>"; };
+		FADC409523756AD4002249D4 /* MLNGalleryMessageDescCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLNGalleryMessageDescCell.h; sourceTree = "<group>"; };
+		FADC409623756AD4002249D4 /* MLNGalleryMessageToolCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLNGalleryMessageToolCell.h; sourceTree = "<group>"; };
+		FADC409723756AD4002249D4 /* MLNGalleryMessageDescCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLNGalleryMessageDescCell.m; sourceTree = "<group>"; };
+		FADC409923756AD4002249D4 /* MLNGalleryMessageBaseCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLNGalleryMessageBaseCellModel.m; sourceTree = "<group>"; };
+		FADC409A23756AD4002249D4 /* MLNGalleryMessageDescCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLNGalleryMessageDescCellModel.h; sourceTree = "<group>"; };
+		FADC409B23756AD4002249D4 /* MLNGalleryMessageToolCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLNGalleryMessageToolCellModel.m; sourceTree = "<group>"; };
+		FADC409C23756AD4002249D4 /* MLNGalleryMessageBaseCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLNGalleryMessageBaseCellModel.h; sourceTree = "<group>"; };
+		FADC409D23756AD4002249D4 /* MLNGalleryMessageDescCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLNGalleryMessageDescCellModel.m; sourceTree = "<group>"; };
+		FADC409E23756AD4002249D4 /* MLNGalleryMessageToolCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLNGalleryMessageToolCellModel.h; sourceTree = "<group>"; };
+		FADC409F23756AD4002249D4 /* MLNGalleryMessageBaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLNGalleryMessageBaseCell.h; sourceTree = "<group>"; };
+		FADC40A023756AD4002249D4 /* MLNGalleryMessageToolCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLNGalleryMessageToolCell.m; sourceTree = "<group>"; };
+		FADC40A123756AD4002249D4 /* MLNGalleryMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLNGalleryMessageViewController.h; sourceTree = "<group>"; };
+		FADC40AA23756B03002249D4 /* MLNGalleryMineBottomPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLNGalleryMineBottomPage.m; sourceTree = "<group>"; };
+		FADC40AB23756B03002249D4 /* MLNGalleryMineBottomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLNGalleryMineBottomCell.m; sourceTree = "<group>"; };
+		FADC40AC23756B03002249D4 /* MLNGalleryMineBottomPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLNGalleryMineBottomPage.h; sourceTree = "<group>"; };
+		FADC40AE23756B03002249D4 /* MLNGalleryMineBottomCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLNGalleryMineBottomCellModel.m; sourceTree = "<group>"; };
+		FADC40AF23756B03002249D4 /* MLNGalleryMineBottomCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLNGalleryMineBottomCellModel.h; sourceTree = "<group>"; };
+		FADC40B023756B03002249D4 /* MLNGalleryMineBottomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLNGalleryMineBottomCell.h; sourceTree = "<group>"; };
+		FADC40B523756B0A002249D4 /* MLNGalleryMineInfoViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLNGalleryMineInfoViewModel.m; sourceTree = "<group>"; };
+		FADC40B623756B0A002249D4 /* MLNGalleryMineInfoViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLNGalleryMineInfoViewModel.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -360,8 +390,6 @@
 				B29500BC2371AFCB00F48F09 /* MLNGalleryDiscoverViewController.m */,
 				B29500BE2371B11E00F48F09 /* MLNGalleryPlusViewController.h */,
 				B29500BF2371B11E00F48F09 /* MLNGalleryPlusViewController.m */,
-				B29500C12371B13F00F48F09 /* MLNGalleryMessageViewController.h */,
-				B29500C22371B13F00F48F09 /* MLNGalleryMessageViewController.m */,
 			);
 			path = Gallery_Native;
 			sourceTree = "<group>";
@@ -381,6 +409,7 @@
 		B29500CB2372619800F48F09 /* Gui */ = {
 			isa = PBXGroup;
 			children = (
+				FADC409123756AD4002249D4 /* Message */,
 				B29501122374137600F48F09 /* Mine */,
 				B295010223740AA700F48F09 /* Discover */,
 				B29500EE2372A90D00F48F09 /* Home */,
@@ -459,6 +488,8 @@
 		B29501122374137600F48F09 /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				FADC40B423756B0A002249D4 /* Model */,
+				FADC40A923756B03002249D4 /* BottomPage */,
 				B29501132374137600F48F09 /* MLNGalleryNavigationBar.h */,
 				B29501142374137600F48F09 /* MLNGalleryInfoNumberView.h */,
 				B29501152374137600F48F09 /* MLNGalleryMineViewController.h */,
@@ -469,6 +500,73 @@
 				B295011A2374137600F48F09 /* MLNGalleryMineHeaderView.m */,
 			);
 			path = Mine;
+			sourceTree = "<group>";
+		};
+		FADC409123756AD4002249D4 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				FADC409823756AD4002249D4 /* Model */,
+				FADC409323756AD4002249D4 /* NormalCell */,
+				FADC409223756AD4002249D4 /* MLNGalleryMessageViewController.m */,
+				FADC40A123756AD4002249D4 /* MLNGalleryMessageViewController.h */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
+		FADC409323756AD4002249D4 /* NormalCell */ = {
+			isa = PBXGroup;
+			children = (
+				FADC409423756AD4002249D4 /* MLNGalleryMessageBaseCell.m */,
+				FADC409523756AD4002249D4 /* MLNGalleryMessageDescCell.h */,
+				FADC409623756AD4002249D4 /* MLNGalleryMessageToolCell.h */,
+				FADC409723756AD4002249D4 /* MLNGalleryMessageDescCell.m */,
+				FADC409F23756AD4002249D4 /* MLNGalleryMessageBaseCell.h */,
+				FADC40A023756AD4002249D4 /* MLNGalleryMessageToolCell.m */,
+			);
+			path = NormalCell;
+			sourceTree = "<group>";
+		};
+		FADC409823756AD4002249D4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FADC409923756AD4002249D4 /* MLNGalleryMessageBaseCellModel.m */,
+				FADC409A23756AD4002249D4 /* MLNGalleryMessageDescCellModel.h */,
+				FADC409B23756AD4002249D4 /* MLNGalleryMessageToolCellModel.m */,
+				FADC409C23756AD4002249D4 /* MLNGalleryMessageBaseCellModel.h */,
+				FADC409D23756AD4002249D4 /* MLNGalleryMessageDescCellModel.m */,
+				FADC409E23756AD4002249D4 /* MLNGalleryMessageToolCellModel.h */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FADC40A923756B03002249D4 /* BottomPage */ = {
+			isa = PBXGroup;
+			children = (
+				FADC40AA23756B03002249D4 /* MLNGalleryMineBottomPage.m */,
+				FADC40AB23756B03002249D4 /* MLNGalleryMineBottomCell.m */,
+				FADC40AC23756B03002249D4 /* MLNGalleryMineBottomPage.h */,
+				FADC40AD23756B03002249D4 /* Model */,
+				FADC40B023756B03002249D4 /* MLNGalleryMineBottomCell.h */,
+			);
+			path = BottomPage;
+			sourceTree = "<group>";
+		};
+		FADC40AD23756B03002249D4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FADC40AE23756B03002249D4 /* MLNGalleryMineBottomCellModel.m */,
+				FADC40AF23756B03002249D4 /* MLNGalleryMineBottomCellModel.h */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FADC40B423756B0A002249D4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FADC40B523756B0A002249D4 /* MLNGalleryMineInfoViewModel.m */,
+				FADC40B623756B0A002249D4 /* MLNGalleryMineInfoViewModel.h */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -658,6 +756,7 @@
 				30A4EB5A231CC5CD00995416 /* MLNMyHttpHandler.m in Sources */,
 				30E24E9422F3D74A00A0E78C /* MLNGlobalFuncTest.m in Sources */,
 				B295011C2374137600F48F09 /* MLNGalleryNavigationBar.m in Sources */,
+				FADC40A823756AD5002249D4 /* MLNGalleryMessageToolCell.m in Sources */,
 				B295012523750F1900F48F09 /* MLNDiscoverAlbumDetailCell.m in Sources */,
 				30E24E9522F3D74A00A0E78C /* MLNStaticTest.m in Sources */,
 				6003F59E195388D20070C39A /* MLNAppDelegate.m in Sources */,
@@ -668,18 +767,27 @@
 				B295011E2374137600F48F09 /* MLNGalleryMineHeaderView.m in Sources */,
 				B29500D62372627000F48F09 /* MLNNativeTabSegmentView.m in Sources */,
 				B29500EA2372A3A400F48F09 /* MLNSimpleViewPager.m in Sources */,
+				FADC40A423756AD5002249D4 /* MLNGalleryMessageDescCell.m in Sources */,
 				B295010523740AA700F48F09 /* MLNNativeWaterfallView.m in Sources */,
+				FADC40B223756B03002249D4 /* MLNGalleryMineBottomCell.m in Sources */,
+				FADC40A623756AD5002249D4 /* MLNGalleryMessageToolCellModel.m in Sources */,
 				B295010B23740AEF00F48F09 /* MLNNativeWaterfallViewCell.m in Sources */,
 				30A4EB60231CD75200995416 /* MLNMyRefreshHandler.m in Sources */,
 				B295011123740E4200F48F09 /* MLNNativeWaterfallHeaderView.m in Sources */,
 				30A4EB5D231CC86B00995416 /* MLNMyImageHandler.m in Sources */,
 				30E24E9622F3D74A00A0E78C /* MLNGlobalVarTest.m in Sources */,
+				FADC40B123756B03002249D4 /* MLNGalleryMineBottomPage.m in Sources */,
 				6003F5A7195388D20070C39A /* MLNViewController.m in Sources */,
 				3012BB102326822F00FA2BB2 /* MLNNavigatorHandler.m in Sources */,
+				FADC40A523756AD5002249D4 /* MLNGalleryMessageBaseCellModel.m in Sources */,
 				B29500C02371B11E00F48F09 /* MLNGalleryPlusViewController.m in Sources */,
+				FADC40B323756B03002249D4 /* MLNGalleryMineBottomCellModel.m in Sources */,
 				B295011B2374137600F48F09 /* MLNGalleryInfoNumberView.m in Sources */,
+				FADC40A223756AD5002249D4 /* MLNGalleryMessageViewController.m in Sources */,
 				B29500CA23725EB800F48F09 /* UIImage+MLNResize.m in Sources */,
-				B29500C32371B13F00F48F09 /* MLNGalleryMessageViewController.m in Sources */,
+				FADC40B723756B0B002249D4 /* MLNGalleryMineInfoViewModel.m in Sources */,
+				FADC40A323756AD5002249D4 /* MLNGalleryMessageBaseCell.m in Sources */,
+				FADC40A723756AD5002249D4 /* MLNGalleryMessageDescCellModel.m in Sources */,
 				B29500F12372BA0000F48F09 /* MLNHomeTableView.m in Sources */,
 				B29500BD2371AFCB00F48F09 /* MLNGalleryDiscoverViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
