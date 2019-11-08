@@ -532,12 +532,12 @@
 		FADC409823756AD4002249D4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				FADC409923756AD4002249D4 /* MLNGalleryMessageBaseCellModel.m */,
-				FADC409A23756AD4002249D4 /* MLNGalleryMessageDescCellModel.h */,
-				FADC409B23756AD4002249D4 /* MLNGalleryMessageToolCellModel.m */,
 				FADC409C23756AD4002249D4 /* MLNGalleryMessageBaseCellModel.h */,
-				FADC409D23756AD4002249D4 /* MLNGalleryMessageDescCellModel.m */,
+				FADC409923756AD4002249D4 /* MLNGalleryMessageBaseCellModel.m */,
 				FADC409E23756AD4002249D4 /* MLNGalleryMessageToolCellModel.h */,
+				FADC409B23756AD4002249D4 /* MLNGalleryMessageToolCellModel.m */,
+				FADC409A23756AD4002249D4 /* MLNGalleryMessageDescCellModel.h */,
+				FADC409D23756AD4002249D4 /* MLNGalleryMessageDescCellModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
