@@ -7,13 +7,3 @@
 --- 暂时设置为全局，避免被gc
 MeiLiShuoMainView = require("MMLuaKitGallery.TabContainerView")
 MeiLiShuoMainView:setup()
-
-
-label = Label():setGravity(Gravity.CENTER):width(200):height(100)
-label:text("Click me")
-
-window:addView(label)
-
-label:onClick(function()
-Navigator:gotoPage("http://172.16.225.11/~momo/xutest.zip",nil, AnimType.Default)
-end)
