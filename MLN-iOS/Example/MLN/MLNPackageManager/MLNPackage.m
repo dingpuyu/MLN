@@ -129,7 +129,7 @@
 
 - (void)checkFileInfo
 {
-    if (![_entryFile hasSuffix:@"zip"]) {
+    if ([_entryFile hasSuffix:@"zip"]) {
         _entryFile = [_entryFile stringByReplacingOccurrencesOfString:@"zip" withString:@"lua"];
     }
     
