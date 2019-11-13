@@ -283,10 +283,10 @@
 		B2C90788237952D30016026F /* MLNPackageManager */ = {
 			isa = PBXGroup;
 			children = (
-				B2C90789237952D30016026F /* MLNPackageManager.h */,
-				B2C9078A237952D30016026F /* MLNPackage.m */,
-				B2C9078B237952D30016026F /* MLNPackageManager.m */,
 				B2C9078C237952D30016026F /* MLNPackage.h */,
+				B2C9078A237952D30016026F /* MLNPackage.m */,
+				B2C90789237952D30016026F /* MLNPackageManager.h */,
+				B2C9078B237952D30016026F /* MLNPackageManager.m */,
 			);
 			path = MLNPackageManager;
 			sourceTree = "<group>";

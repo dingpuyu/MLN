@@ -9,7 +9,7 @@
 #import "MLNPackageManager.h"
 #import "MLNPackage.h"
 #import "MLNMyHttpHandler.h"
-#import "MLNZipArchive.h"
+#import "SSZipArchive.h"
 
 static dispatch_queue_t  mln_package_file_operation_completion_queue() {
     static dispatch_queue_t mln_in_package_file_operation_completion_queue;
@@ -22,7 +22,7 @@ static dispatch_queue_t  mln_package_file_operation_completion_queue() {
 
 @interface MLNPackageManager()
 
-@property (nonatomic, strong) MLNHttp *http;
+@property (nonatomic, strong) id<MLNHttpHandlerProtocol> httpHandler;
 @property (nonatomic, strong) NSMutableDictionary *loadCompleteCallbacks;
 @property (nonatomic, strong) NSFileManager *fileManager;
 
@@ -94,16 +94,12 @@ static dispatch_queue_t  mln_package_file_operation_completion_queue() {
         [self.fileManager createDirectoryAtPath:downloadURL.path withIntermediateDirectories:YES attributes:nil error:nil];
     }
     [params setObject:downloadURL.path forKey:@"__path"];
-    [self.http mln_download:urlString params:params progressHandler:^(float progress, float total) {
-//        __strong typeof(weakSelf) strongSelf = weakSelf;
-//        __weak typeof(weakPackage) strongPackage = weakPackage;
-//
-    } completionHandler:^(BOOL success, NSDictionary *respInfo, NSURL *filePath, NSDictionary *errorInfo) {
+    [self.httpHandler http:nil download:urlString params:params progressHandler:nil completionHandler:^(BOOL success, NSDictionary *responsInfo, id respData, NSDictionary *errorInfo) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         __strong typeof(weakPackage) strongPackage = weakPackage;
         MLNPackageLoadCompleteCallback callback = [strongSelf.loadCompleteCallbacks objectForKey:strongPackage.urlString];
         if (success) {
-            [strongSelf unzipWithZipURL:filePath tempURL:tempURL package:strongPackage];
+            [strongSelf unzipWithZipURL: [responsInfo objectForKey:@"filePath"]  tempURL:tempURL package:strongPackage];
             [strongSelf.loadCompleteCallbacks removeObjectForKey:strongPackage.urlString];
         } else if(callback){
             callback(NO, strongPackage, nil ,errorInfo.description);
@@ -124,8 +120,8 @@ static dispatch_queue_t  mln_package_file_operation_completion_queue() {
         return;
     }
     
-//    mln_package_file_operation_completion_queue
-    BOOL ret = [MLNZipArchive unzipData:[NSData dataWithContentsOfURL:zipURL] toDirectory:tempURL.path];
+    BOOL ret = [SSZipArchive unzipFileAtPath:zipURL.path toDestination:tempURL.path];
+    
     if (ret == NO) {
         [fileManager removeItemAtURL:tempURL error:nil];
         if (callback) {
@@ -141,8 +137,6 @@ static dispatch_queue_t  mln_package_file_operation_completion_queue() {
     
     NSError *error = nil;
     [fileManager moveItemAtURL:tempURL toURL:targetURL error:&error];
-//    [fileManager copyItemAtURL:tempURL toURL:targetURL error:&error];
-    
     if (!callback) {
         return;
     }
@@ -190,12 +184,12 @@ static dispatch_queue_t  mln_package_file_operation_completion_queue() {
 }
 
 #pragma mark - getter
-- (MLNHttp *)http
+- (id<MLNHttpHandlerProtocol>)httpHandler
 {
-    if (!_http) {
-        _http = [[MLNHttp alloc] init];
+    if (!_httpHandler) {
+        _httpHandler = [[MLNMyHttpHandler alloc] init];
     }
-    return _http;
+    return _httpHandler;
 }
 
 - (NSMutableDictionary *)loadCompleteCallbacks

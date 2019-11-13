@@ -36,7 +36,31 @@
 }
 
 - (void)http:(MLNHttp *)http download:(NSString *)urlString params:(NSDictionary *)params progressHandler:(void (^)(float, float))progressHandler completionHandler:(void (^)(BOOL, NSDictionary *, id, NSDictionary *))completionHandler {
-    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+    [[[AFHTTPSessionManager manager] downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (progressHandler) {
+                progressHandler(downloadProgress.completedUnitCount/downloadProgress.totalUnitCount , downloadProgress.totalUnitCount);
+            }
+        });
+    } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+        
+        //------------------------------------
+        // 获取全局统一zip文件保存路径
+        NSString *luaZipFileDirectory = MLNFile.fileManagerRootPath;
+        
+        if ([params valueForKey:@"__path"]) {
+            luaZipFileDirectory = [MLNFile directoryWithPath:[params valueForKey:@"__path"]];
+        }
+        NSString *luaZipFilePath = [luaZipFileDirectory stringByAppendingPathComponent:urlString.lastPathComponent];
+        
+        return [NSURL fileURLWithPath:luaZipFilePath];
+    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+        
+        if (completionHandler && filePath) {
+            completionHandler(!error, @{@"filePath":filePath}, nil , error.userInfo);
+        }
+    }] resume];
 }
 
 - (void)http:(MLNHttp *)http get:(NSString *)urlString params:(NSDictionary *)params completionHandler:(void (^)(BOOL, NSDictionary *, NSDictionary *))completionHandler {
