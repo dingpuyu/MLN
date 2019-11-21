@@ -25,6 +25,8 @@
 
 @interface MLNImageView()
 
+@property (nonatomic, assign) UIEdgeInsets padding;
+@property (nonatomic, strong) UIImageView *innerView;
 @property (nonatomic, assign) CGFloat blurValue;
 @property (nonatomic, assign) BOOL processImage;
 @property (nonatomic, weak) UIToolbar *effectView;
@@ -41,11 +43,12 @@
 - (instancetype)init
 {
     if (self = [super initWithFrame:CGRectZero]){
-        self.contentMode = UIViewContentModeScaleAspectFit;
+        self.innerView.contentMode = UIViewContentModeScaleAspectFit;
         self.imageContentMode = UIViewContentModeScaleAspectFit;
         self.imageViewMode = MLNImageViewModeNone;
         self.clipsToBounds = YES;
         self.userInteractionEnabled = YES;
+        self.innerView.userInteractionEnabled = YES;
     }
     return self;
 }
@@ -53,13 +56,13 @@
 - (void)setImage:(UIImage *)image
 {
     image = [self convertToBlurImageIfNeed:image];
-    [super setImage:image];
+    [self.innerView setImage:image];
     [self.lua_node needLayoutAndSpread];
 }
 
 - (CGSize)lua_measureSizeWithMaxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight
 {
-    return self.image ? self.image.size : CGSizeZero;
+    return self.innerView.image ? self.innerView.image.size : CGSizeZero;
 }
 
 - (void)checkContentMode
@@ -68,8 +71,8 @@
         case MLNImageViewModeNine:
             break;
         default:
-            if (self.imageContentMode != self.contentMode) {
-                self.contentMode = self.imageContentMode;
+            if (self.imageContentMode != self.innerView.contentMode) {
+                self.innerView.contentMode = self.imageContentMode;
             }
             break;
     }
@@ -83,11 +86,11 @@
 
 - (void)setNineImageCheckContentMode:(UIImage *)image
 {
-    self.image = nil;
-    if (self.contentMode != UIViewContentModeScaleToFill) {
-        self.contentMode = UIViewContentModeScaleToFill;
+    self.innerView.image = nil;
+    if (self.innerView.contentMode != UIViewContentModeScaleToFill) {
+        self.innerView.contentMode = UIViewContentModeScaleToFill;
     }
-    self.image = image;
+    self.innerView.image = image;
 }
 
 #pragma mark - Blur Image
@@ -105,19 +108,19 @@
 
 - (void)checkProcessImageWithBlurValue:(CGFloat)blurValue
 {
-    if (self.rawImage != nil && self.rawImage != self.image && _blurValue == blurValue ) {
+    if (self.rawImage != nil && self.rawImage != self.innerView.image && _blurValue == blurValue ) {
         return;
     }
     _effectView.hidden = YES;
     _blurValue = blurValue;
-    [self setImage:self.image];
+    [self setImage:self.innerView.image];
 }
 
 - (void)checkEffectViewWithBlurValue:(CGFloat)blurValue
 {
     _blurValue = blurValue;
     if (self.rawImage) {
-        self.image = self.rawImage;
+        self.innerView.image = self.rawImage;
         self.rawImage = nil;
     }
     if (blurValue <= 0) {
@@ -138,7 +141,7 @@
 {
     self.imageViewMode = MLNImageViewModeNone;
     if (!stringNotEmpty(imageName)) {
-        self.image = nil;
+        self.innerView.image = nil;
         return;
     }
     id<MLNImageLoaderProtocol> imageLoder = self.imageLoader;
@@ -150,7 +153,7 @@
 - (void)lua_setImageWith:(nonnull NSString *)imageName placeHolderImage:(NSString *)placeHolder
 {
     if ((!stringNotEmpty(imageName) && !stringNotEmpty(placeHolder))) {
-        self.image = nil;
+        self.innerView.image = nil;
         return;
     }
     id<MLNImageLoaderProtocol> imageLoder = self.imageLoader;
@@ -163,7 +166,7 @@
 {
     self.imageViewMode = MLNImageViewModeNone;
     if ((!stringNotEmpty(imageName) && !stringNotEmpty(placeHolder))) {
-        self.image = nil;
+        self.innerView.image = nil;
         return;
     }
     MLNCheckTypeAndNilValue(callback, @"callback", [MLNBlock class]);
@@ -190,7 +193,7 @@
 {
     self.imageViewMode = MLNImageViewModeNone;
     if ((!stringNotEmpty(imageName) && !stringNotEmpty(placeHolder))) {
-        self.image = nil;
+        self.innerView.image = nil;
         return;
     }
     id<MLNImageLoaderProtocol> imageLoder = self.imageLoader;
@@ -209,7 +212,7 @@
     _nineImageName = imageName;
     _synchronziedSetNineImage = synchronzied;
     if (!stringNotEmpty(imageName)) {
-        self.image = nil;
+        self.innerView.image = nil;
         return;
     }
     
@@ -247,7 +250,7 @@
                 [self setNineImageCheckContentMode:resizedImage];
             }
         } else {
-            self.image = nil;
+            self.innerView.image = nil;
         }
     }];
 }
@@ -318,6 +321,7 @@
 - (void)lua_changedLayout
 {
     [super lua_changedLayout];
+    self.innerView.frame = self.bounds;
     if (_blurValue > 0) {
         [self mln_pushLazyTask:self.lazyTask];
     }
@@ -336,6 +340,16 @@
 }
 
 #pragma - mark getter & setter
+
+- (UIImageView *)innerView
+{
+    if (!_innerView) {
+        _innerView = [[UIImageView alloc] init];
+        [self addSubview:_innerView];
+    }
+    return _innerView;
+}
+
 - (UIToolbar *)effectView
 {
     if (!_effectView) {
