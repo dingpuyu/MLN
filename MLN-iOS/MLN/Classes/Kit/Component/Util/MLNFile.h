@@ -21,7 +21,8 @@ typedef NS_ENUM(NSInteger, MLNFileErrorCode) {
     MLNFileErrorCodeMoveFileFailed = -10,
     MLNFileErrorCodeCopyFileFailed = -11,
     MLNFileErrorCodeGetFileListFailed = -12,
-    MLNFileErrorCodeGetFileMD5ParseFailed = -13
+    MLNFileErrorCodeFileConflict = -13,
+    MLNFileErrorCodeGetFileMD5ParseFailed = -14,
 };
 
 @interface MLNFile : NSObject <MLNStaticExportProtocol>

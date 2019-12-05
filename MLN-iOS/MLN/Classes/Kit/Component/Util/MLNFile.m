@@ -332,6 +332,29 @@ static NSString *fileManagerRootPath = nil;
     });
 }
 
++ (NSInteger)lua_syncMoveFile:(NSString *)srcPath dstPath:(NSString *)dstPath
+{
+    MLNKitLuaStaticAssert(srcPath && srcPath.length >0, @"The source path of move must not be nil!");
+    MLNKitLuaStaticAssert(dstPath && dstPath.length >0, @"The destination path of move must not be nil!");
+    NSString *realSrcPath = [self realFilePath:srcPath createDirIfNeed:YES];
+    NSString *realDstPath = [self realFilePath:dstPath createDirIfNeed:YES];
+    NSFileManager *manager = [NSFileManager defaultManager];
+    if (![manager fileExistsAtPath:realSrcPath]) {
+        return MLNFileErrorCodeSourceFileNotExist;
+    }
+    if ([manager fileExistsAtPath:realDstPath]) {
+        return MLNFileErrorCodeFileConflict;
+    }
+    if (realSrcPath && realDstPath) {
+        NSError *error = nil;
+        [manager moveItemAtPath:realSrcPath toPath:realDstPath error:&error];
+        if (!error) {
+            return 0;
+        }
+    }
+    return MLNFileErrorCodeMoveFileFailed;
+}
+
 + (void)lua_asyncMoveFile:(NSString *)srcPath destPath:(NSString *)dstPath completionBlock:(MLNBlock *)completion
 {
     MLNKitLuaStaticAssert(srcPath && srcPath.length >0, @"The source path of move must not be nil!");
@@ -564,6 +587,7 @@ LUA_EXPORT_STATIC_METHOD(syncWriteFile, "lua_fileWrite:text:", MLNFile)
 LUA_EXPORT_STATIC_METHOD(syncWriteMap, "lua_fileWrite:map:", MLNFile)
 LUA_EXPORT_STATIC_METHOD(syncWriteArray, "lua_fileWrite:array:", MLNFile)
 LUA_EXPORT_STATIC_METHOD(syncUnzipFile, "lua_unzipFile:targetPath:", MLNFile)
+LUA_EXPORT_STATIC_METHOD(syncMoveFile, "lua_syncMoveFile:dstPath:", MLNFile)
 LUA_EXPORT_STATIC_METHOD(asyncUnzipFile, "lua_asyncUnzipFile:targetPath:callback:", MLNFile)
 LUA_EXPORT_STATIC_METHOD(asyncWriteArray, "lua_asyncWriteArray:array:callback:", MLNFile)
 LUA_EXPORT_STATIC_METHOD(asyncWriteMap, "lua_asyncWriteMap:map:callback:", MLNFile)
