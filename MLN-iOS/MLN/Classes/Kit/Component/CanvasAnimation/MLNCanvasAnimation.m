@@ -254,6 +254,8 @@
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
+    _status = MLNCanvasAnimationStatusNone;
+    NSLog(@"animationDidStop:%@", anim);
     // callback
     MLNBlock *callback = [self.animationCallbacks objectForKey:kAnimationEnd];
     if (callback) {
@@ -302,8 +304,8 @@
     CGPoint newPoint = CGPointMake(targetView.bounds.size.width * point.x, targetView.bounds.size.height * point.y);
     CGPoint oldPoint = CGPointMake(targetView.bounds.size.width * targetView.layer.anchorPoint.x, targetView.bounds.size.height * targetView.layer.anchorPoint.y);
     
-    newPoint = CGPointApplyAffineTransform(newPoint, targetView.transform);
-    oldPoint = CGPointApplyAffineTransform(oldPoint, targetView.transform);
+    newPoint = CGPointApplyAffineTransform(newPoint, CGAffineTransformIdentity);
+    oldPoint = CGPointApplyAffineTransform(oldPoint, CGAffineTransformIdentity);
     
     CGPoint position = targetView.layer.position;
     
@@ -367,7 +369,7 @@
     switch (interpolatorType) {
         case MLNAnimationInterpolatorTypeBounce:
         case MLNAnimationInterpolatorTypeOvershoot: {
-            return (CABasicAnimation *)[MLNKeyframeAnimationBuilder buildAnimationWithKeyPath:key interpolatorType:MLNAnimationInterpolatorTypeBounce];
+            return (CABasicAnimation *)[MLNKeyframeAnimationBuilder buildAnimationWithKeyPath:key interpolatorType:interpolatorType];
         }
         case MLNAnimationInterpolatorTypeLinear:
         case MLNAnimationInterpolatorTypeAccelerate:
@@ -497,13 +499,13 @@
 - (void)setDuration:(CGFloat)duration
 {
     _duration = duration;
-    self.animationGroup.duration = duration;
+    self.animationGroup.duration = duration + _delay;
 }
 
 - (void)setDelay:(CGFloat)delay
 {
     _delay = delay;
-//    self.animationGroup.beginTime = delay;
+    [self setDuration:_duration];
 }
 
 - (void)setRepeatCount:(NSInteger)repeatCount
@@ -569,6 +571,8 @@
 {
     if (count == -1) {
         count = MAX_INT;
+    } else {
+        count = count + 1;
     }
     self.repeatType = type;
     self.repeatCount = count;
@@ -597,6 +601,7 @@ LUA_EXPORT_PROPERTY(setPivotY, "setPivotY:", "lua_pivotY", MLNCanvasAnimation)
 LUA_EXPORT_PROPERTY(setDuration, "setDuration:", "duration", MLNCanvasAnimation)
 LUA_EXPORT_PROPERTY(setDelay, "setDelay:", "delay", MLNCanvasAnimation)
 LUA_EXPORT_PROPERTY(setInterpolator, "setInterpolator:", "interpolator", MLNCanvasAnimation)
+LUA_EXPORT_PROPERTY(setAutoBack, "setAutoBack:", "autoBack", MLNCanvasAnimation)
 LUA_EXPORT_METHOD(setRepeat, "lua_setRepeat:count:",  MLNCanvasAnimation)
 LUA_EXPORT_METHOD(startWithView, "lua_startWithView:", MLNCanvasAnimation)
 LUA_EXPORT_METHOD(cancel, "cancel", MLNCanvasAnimation)

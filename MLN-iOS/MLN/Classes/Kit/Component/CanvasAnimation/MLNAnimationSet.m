@@ -24,10 +24,12 @@
 
 @implementation MLNAnimationSet
 
-- (instancetype)initWithLuaCore:(MLNLuaCore *)luaCore shareInterpolator:(BOOL)shareInterpolator
+- (instancetype)initWithLuaCore:(MLNLuaCore *)luaCore shareInterpolator:(NSNumber *)shareInterpolator
 {
     if (self = [super init]) {
-        _shareInterpolator = shareInterpolator;
+        if (shareInterpolator) {
+            _shareInterpolator = [shareInterpolator boolValue];
+        }
     }
     return self;
 }
@@ -65,6 +67,41 @@
     return _animationsGroupArray;
 }
 
+#pragma mark - override
+
+- (void)animationStartCallback
+{
+    [super animationStartCallback];
+    for (MLNCanvasAnimation *canvasAnim in self.animationsArray) {
+        [canvasAnim animationStartCallback];
+    }
+}
+
+- (void)animationRepeatCallback:(NSUInteger)repeatCount
+{
+    [super animationRepeatCallback:repeatCount];
+    for (MLNCanvasAnimation *canvasAnim in self.animationsArray) {
+        [canvasAnim animationRepeatCallback:repeatCount];
+    }
+}
+
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
+{
+    [super animationDidStop:anim finished:flag];
+    for (MLNCanvasAnimation *canvasAnim in self.animationsArray) {
+        canvasAnim.status = MLNCanvasAnimationStatusNone;
+        [canvasAnim animationDidStop:anim finished:flag];
+    }
+}
+
+- (void)cancel
+{
+    [super cancel];
+    for (MLNCanvasAnimation *canvasAnim in self.animationsArray) {
+        [canvasAnim cancel];
+    }
+}
+
 #pragma mark - Export Method
 - (void)lua_addAnimation:(MLNCanvasAnimation *)animation
 {
@@ -73,10 +110,10 @@
         return;
     }
     //Android端会按索引来，到了就执行，故做一次copy操作，不影响多次使用
-    animation = [animation copy];
+//    animation = [animation copy];
     [self.animationsArray addObject:animation];
     animation.animationGroup.animations = [animation animationValues];
-    self.duration = MAX(self.duration, animation.duration + animation.delay);
+    self.duration = MAX(self.duration, (animation.duration + animation.delay) * animation.repeatCount);
     self.animationGroup.duration = self.duration;
     self.pivotX = animation.pivotX;
     self.pivotXType = animation.pivotXType;
