@@ -50,7 +50,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setRepeatCallback:(MLNBlock *)callback;
 - (void)tick;
 - (void)animationRealStart;
-
+- (void)animationStartCallback;
+- (void)animationRepeatCallback:(NSUInteger)repeatCount;
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag;
 
 @end
 

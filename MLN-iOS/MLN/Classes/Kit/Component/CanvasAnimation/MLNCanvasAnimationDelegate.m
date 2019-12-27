@@ -35,6 +35,7 @@
     if (!_ignoreAnimationCallback) {
         [self.animation animationDidStop:anim finished:flag];
     }
+    _ignoreAnimationCallback = NO;
 }
 
 
