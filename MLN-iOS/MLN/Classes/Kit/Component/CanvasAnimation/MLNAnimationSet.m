@@ -69,11 +69,11 @@
 
 #pragma mark - override
 
-- (void)animationStartCallback
+- (void)animationRealStart
 {
-    [super animationStartCallback];
+    [super animationRealStart];
     for (MLNCanvasAnimation *canvasAnim in self.animationsArray) {
-        [canvasAnim animationStartCallback];
+        [canvasAnim animationRealStart];
     }
 }
 
@@ -81,18 +81,11 @@
 {
     [super animationRepeatCallback:repeatCount];
     for (MLNCanvasAnimation *canvasAnim in self.animationsArray) {
-        [canvasAnim animationRepeatCallback:repeatCount];
+        [canvasAnim animationStopCallbackFinished:YES];
+        [canvasAnim animationRealStart];
     }
 }
 
-- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
-{
-    [super animationDidStop:anim finished:flag];
-    for (MLNCanvasAnimation *canvasAnim in self.animationsArray) {
-        canvasAnim.status = MLNCanvasAnimationStatusNone;
-        [canvasAnim animationDidStop:anim finished:flag];
-    }
-}
 
 - (void)cancel
 {
@@ -113,7 +106,7 @@
 //    animation = [animation copy];
     [self.animationsArray addObject:animation];
     animation.animationGroup.animations = [animation animationValues];
-    self.duration = MAX(self.duration, (animation.duration + animation.delay) * animation.repeatCount);
+    self.duration = MAX(self.duration, [animation calculateTotalDuration]);
     self.animationGroup.duration = self.duration;
     self.pivotX = animation.pivotX;
     self.pivotXType = animation.pivotXType;

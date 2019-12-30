@@ -38,6 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger repeatCount;
 @property (nonatomic, assign) NSInteger executeCount;
 @property (nonatomic, assign) MLNCanvasAnimationStatus status;
+@property (nonatomic, assign) CGFloat calculateTotalDuration;
 
 //Usually overridden in subclasses
 @property (nonatomic, copy) NSString *animationKey;
@@ -52,7 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)animationRealStart;
 - (void)animationStartCallback;
 - (void)animationRepeatCallback:(NSUInteger)repeatCount;
-- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag;
+- (void)animationStopCallbackFinished:(BOOL)finished;
 
 @end
 

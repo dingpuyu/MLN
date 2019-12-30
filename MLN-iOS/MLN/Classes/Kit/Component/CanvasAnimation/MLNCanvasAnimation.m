@@ -49,6 +49,7 @@
         _pivotXType = MLNAnimationValueTypeRelativeToSelf;
         _pivotY = 0.5;
         _pivotYType = MLNAnimationValueTypeRelativeToSelf;
+        _repeatCount = 1;
     }
     return self;
 }
@@ -169,9 +170,6 @@
             }
             self.status = MLNCanvasAnimationStatusRunning;
             [self animationRealStart];
-            if (self.repeatCount) {
-                [[MLNAnimationHandler sharedHandler] addCallback:self];
-            }
             [self setupAnchorPointWithTargetView:_targetView];
             [_targetView.layer addAnimation:self.animationGroup forKey:self.animationKey];
         }
@@ -197,25 +195,29 @@
     if ([self remainingDelay] > FLT_EPSILON) {
         return;
     }
-    CGFloat percent = (CACurrentMediaTime() - self.startTime - self.delay) / (self.duration * (_repeatType == MLNAnimationRepeatTypeReverse?2:1));
+    CGFloat percent = (CACurrentMediaTime() - self.startTime + (_repeatType == MLNAnimationRepeatTypeReverse?self.delay:0)) / ((self.duration + self.delay) * (_repeatType == MLNAnimationRepeatTypeReverse?2:1) );
    
     NSInteger repeatCount = (NSUInteger)percent;
-    percent = percent - repeatCount;
+    if (self.repeatCount > 0 && self.repeatCount <= repeatCount) {
+        self.status = MLNCanvasAnimationStatusNone;
+        [self animationStopCallbackFinished:YES];
+    }
+    
     if (repeatCount != _repeatCounting && repeatCount < self.repeatCount) {
         _repeatCounting = repeatCount;
         [self animationRepeatCallback:_repeatCounting];
-    }
-    if (self.repeatCount > 0 && self.repeatCount <= repeatCount) {
-        [[MLNAnimationHandler sharedHandler] removeCallback:self];
-        self.status = MLNCanvasAnimationStatusNone;
     }
 }
 
 - (void)animationRealStart
 {
+    [[MLNAnimationHandler sharedHandler] removeCallback:self];
     self.startTime = CACurrentMediaTime();
     _repeatCounting = 0;
     [self animationStartCallback];
+    if (self.repeatCount) {
+        [[MLNAnimationHandler sharedHandler] addCallback:self];
+    }
 }
 
 - (NSTimeInterval)remainingDelay
@@ -242,6 +244,16 @@
     }
 }
 
+- (void)animationStopCallbackFinished:(BOOL)finished
+{
+    [[MLNAnimationHandler sharedHandler] removeCallback:self];
+    MLNBlock *callback = [self.animationCallbacks objectForKey:kAnimationEnd];
+    if (callback) {
+        [callback addBOOLArgument:finished];
+        [callback callIfCan];
+    }
+}
+
 #pragma mark - CAAnimationDelegate
 - (void)animationDidStart:(CAAnimation *)anim
 {
@@ -255,14 +267,11 @@
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
     _status = MLNCanvasAnimationStatusNone;
-    NSLog(@"animationDidStop:%@", anim);
-    // callback
-    MLNBlock *callback = [self.animationCallbacks objectForKey:kAnimationEnd];
-    if (callback) {
-        [callback addBOOLArgument:flag];
-        [callback callIfCan];
+//    异常结束时，由回调触发
+    if (flag) {
+        return;
     }
-    [[MLNAnimationHandler sharedHandler] removeCallback:self];
+    [self animationStopCallbackFinished:flag];
 }
 
 #pragma mark - MLNAnimationHandlerCallbackProtocol
@@ -337,6 +346,10 @@
     return copy;
 }
 
+- (CGFloat)calculateTotalDuration
+{
+    return ((self.duration + self.delay) * (_repeatType == MLNAnimationRepeatTypeReverse?2:1) * self.repeatCount - (_repeatType == MLNAnimationRepeatTypeReverse?self.delay:0));
+}
 
 #pragma mark - getter & setter
 
