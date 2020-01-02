@@ -132,6 +132,12 @@ static int lua_animation_init(lua_State *L) {
     return copy;
 }
 
+- (CATransform3D)concatTransform3DWith:(CATransform3D)transform
+{
+    return CATransform3DScale(transform, _fromX, _fromY, 1.0);
+    
+}
+
 #pragma mark - getter & setter
 - (NSString *)animationKey
 {

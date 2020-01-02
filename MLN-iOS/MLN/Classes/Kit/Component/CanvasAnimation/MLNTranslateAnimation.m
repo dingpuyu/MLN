@@ -122,6 +122,11 @@ static int lua_animation_init(lua_State *L) {
     return copy;
 }
 
+- (CATransform3D)concatTransform3DWith:(CATransform3D)transform
+{
+    return CATransform3DTranslate(transform, _fromX, _fromY, 0);
+}
+
 #pragma mark - getter & setter
 - (void)setFromXType:(MLNAnimationValueType)fromXType
 {

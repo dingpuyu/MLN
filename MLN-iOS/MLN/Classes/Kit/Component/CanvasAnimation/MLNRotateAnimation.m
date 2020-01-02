@@ -124,6 +124,12 @@ static int lua_animation_init(lua_State *L) {
     return copy;
 }
 
+- (CATransform3D)concatTransform3DWith:(CATransform3D)transform
+{
+    CABasicAnimation *animation = [self animationForKey:kRotaionZ];
+    return CATransform3DRotate(transform, [animation.fromValue floatValue], 0, 0, 1);
+}
+
 #pragma mark - getter & setter
 - (NSString *)animationKey
 {

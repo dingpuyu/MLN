@@ -77,6 +77,20 @@
     }
 }
 
+- (CATransform3D)concatTransform3DWith:(CATransform3D)transform
+{
+    CATransform3D trans = transform;
+    for (MLNCanvasAnimation *canvasAnim in self.animationsArray) {
+        CABasicAnimation *opacity = [canvasAnim animationForKey:kOpacity];
+        if (opacity) {
+            self.targetView.alpha = [opacity.fromValue floatValue];
+        }
+        trans = [canvasAnim concatTransform3DWith:trans];
+    }
+    
+    return trans;
+}
+
 - (void)animationRepeatCallback:(NSUInteger)repeatCount
 {
     [super animationRepeatCallback:repeatCount];

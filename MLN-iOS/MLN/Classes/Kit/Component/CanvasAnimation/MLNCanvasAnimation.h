@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class MLNBlock;
 @interface MLNCanvasAnimation : NSObject <NSCopying, MLNEntityExportProtocol>
 
+@property (nonatomic, weak) UIView *targetView;
 @property (nonatomic, strong, readonly) CAAnimationGroup *animationGroup;
 @property (nonatomic, strong) NSMutableDictionary<NSString *, CABasicAnimation *> *animations;
 @property (nonatomic, assign) MLNAnimationValueType pivotXType;
@@ -39,6 +40,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger executeCount;
 @property (nonatomic, assign) MLNCanvasAnimationStatus status;
 @property (nonatomic, assign) CGFloat calculateTotalDuration;
+@property (nonatomic, assign) CATransform3D normalTransform3D;
+@property (nonatomic, assign) CGFloat normalAlpha;
 
 //Usually overridden in subclasses
 @property (nonatomic, copy) NSString *animationKey;
@@ -54,6 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)animationStartCallback;
 - (void)animationRepeatCallback:(NSUInteger)repeatCount;
 - (void)animationStopCallbackFinished:(BOOL)finished;
+- (CATransform3D)concatTransform3DWith:(CATransform3D)transform;
 
 @end
 

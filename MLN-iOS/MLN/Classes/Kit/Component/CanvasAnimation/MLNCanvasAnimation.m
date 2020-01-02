@@ -17,6 +17,7 @@
 #import "MLNAnimationHandler.h"
 #import "NSDictionary+MLNSafety.h"
 #import "MLNKeyframeAnimationBuilder.h"
+#import "MLNTransformTask.h"
 
 #define kAnimationStart @"MLNCanvasAnimation.Start"
 #define kAnimationEnd @"MLNCanvasAnimation.End"
@@ -30,7 +31,6 @@
     NSUInteger _repeatCounting;
 }
 
-@property (nonatomic, weak) UIView *targetView;
 @property (nonatomic, strong) NSMutableDictionary<NSString *, MLNBlock *> *animationCallbacks;
 @property (nonatomic, strong) MLNBeforeWaitingTask *lazyTask;
 @property (nonatomic, weak) MLNCanvasAnimationDelegate *animationDelegate;
@@ -82,6 +82,8 @@
 - (void)cancel
 {
     [_targetView.layer removeAnimationForKey:self.animationKey];
+    _targetView.layer.transform = self.normalTransform3D;
+    _targetView.alpha = _normalAlpha;
     [[MLNAnimationHandler sharedHandler] removeCallback:self];
     self.status = MLNCanvasAnimationStatusNone;
 }
@@ -195,7 +197,7 @@
     if ([self remainingDelay] > FLT_EPSILON) {
         return;
     }
-    CGFloat percent = (CACurrentMediaTime() - self.startTime + (_repeatType == MLNAnimationRepeatTypeReverse?self.delay:0)) / ((self.duration + self.delay) * (_repeatType == MLNAnimationRepeatTypeReverse?2:1) );
+    CGFloat percent = ((CACurrentMediaTime() - self.startTime) / (self.duration + self.delay));
    
     NSInteger repeatCount = (NSUInteger)percent;
     if (self.repeatCount > 0 && self.repeatCount <= repeatCount) {
@@ -211,6 +213,8 @@
 
 - (void)animationRealStart
 {
+    _normalAlpha = _targetView.alpha;
+    _normalTransform3D = _targetView.layer.transform;
     [[MLNAnimationHandler sharedHandler] removeCallback:self];
     self.startTime = CACurrentMediaTime();
     _repeatCounting = 0;
@@ -218,6 +222,12 @@
     if (self.repeatCount) {
         [[MLNAnimationHandler sharedHandler] addCallback:self];
     }
+    _targetView.layer.transform = [self concatTransform3DWith:CATransform3DIdentity];
+}
+
+- (CATransform3D)concatTransform3DWith:(CATransform3D)transform
+{
+    return transform;
 }
 
 - (NSTimeInterval)remainingDelay
@@ -246,6 +256,11 @@
 
 - (void)animationStopCallbackFinished:(BOOL)finished
 {
+    if (_autoBack) {
+        _targetView.layer.transform = _normalTransform3D;
+        _targetView.alpha = _normalAlpha;
+    }
+    
     [[MLNAnimationHandler sharedHandler] removeCallback:self];
     MLNBlock *callback = [self.animationCallbacks objectForKey:kAnimationEnd];
     if (callback) {
@@ -348,7 +363,7 @@
 
 - (CGFloat)calculateTotalDuration
 {
-    return ((self.duration + self.delay) * (_repeatType == MLNAnimationRepeatTypeReverse?2:1) * self.repeatCount - (_repeatType == MLNAnimationRepeatTypeReverse?self.delay:0));
+    return ((self.duration + self.delay) * self.repeatCount);
 }
 
 #pragma mark - getter & setter
@@ -411,7 +426,8 @@
 {
     if (_delay) {
         for (CABasicAnimation *animation in self.animations.allValues) {
-            animation.beginTime = _delay;
+            animation.duration = _duration;
+            animation.beginTime =  _delay;
         }
     }
     return self.animations.allValues;
@@ -584,18 +600,18 @@
 {
     if (count == -1) {
         count = MAX_INT;
+        self.repeatCount = count;
     } else {
-        count = count + 1;
+        self.repeatCount = count + 1;
     }
     self.repeatType = type;
-    self.repeatCount = count;
     switch (type) {
         case MLNAnimationRepeatTypeBeginToEnd:
-            self.animationGroup.repeatCount = count;
+            self.animationGroup.repeatCount = count + 1;
             self.animationGroup.autoreverses = NO;
             break;
         case MLNAnimationRepeatTypeReverse:
-            self.animationGroup.repeatCount = count;
+            self.animationGroup.repeatCount = (count + 1) / 2.0;
             self.animationGroup.autoreverses = YES;
             break;
         default:
