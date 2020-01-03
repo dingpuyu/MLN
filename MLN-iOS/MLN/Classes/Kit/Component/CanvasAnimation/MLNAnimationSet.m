@@ -10,6 +10,7 @@
 #import "MLNEntityExporterMacro.h"
 #import "MLNBlock.h"
 #import "NSDictionary+MLNSafety.h"
+#import "MLNAlphaAnimation.h"
 
 #define kCanvasCapcity 2
 
@@ -81,9 +82,11 @@
 {
     CATransform3D trans = transform;
     for (MLNCanvasAnimation *canvasAnim in self.animationsArray) {
-        CABasicAnimation *opacity = [canvasAnim animationForKey:kOpacity];
-        if (opacity) {
-            self.targetView.alpha = [opacity.fromValue floatValue];
+        if ([canvasAnim isKindOfClass:[MLNAlphaAnimation class]]) {
+            CABasicAnimation *baseAnimation = [canvasAnim animationForKey:kOpacity];
+            if (baseAnimation) {
+                self.targetView.alpha = [baseAnimation.fromValue floatValue];
+            }
         }
         trans = [canvasAnim concatTransform3DWith:trans];
     }
