@@ -72,7 +72,7 @@ LUA_EXPORT_VIEW_METHOD(setGravity, "setLua_gravity:",MLNView)
 LUA_EXPORT_VIEW_METHOD(requestLayout, "lua_requestLayout", MLNView)
 LUA_EXPORT_VIEW_METHOD(convertRelativePointTo, "lua_convertRelativePointToView:point:",MLNView)
 // render
-LUA_EXPORT_VIEW_PROPERTY(alpha, "setAlpha:","alpha", MLNView)
+LUA_EXPORT_VIEW_PROPERTY(alpha, "lua_setAlpha:","alpha", MLNView)
 LUA_EXPORT_VIEW_PROPERTY(hidden, "setHidden:","isHidden", MLNView)
 LUA_EXPORT_VIEW_PROPERTY(gone, "setLua_gone:","lua_gone", MLNView)
 LUA_EXPORT_VIEW_PROPERTY(borderWidth, "lua_setBorderWidth:","lua_borderWidth", MLNView)

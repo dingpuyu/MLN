@@ -40,8 +40,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger executeCount;
 @property (nonatomic, assign) MLNCanvasAnimationStatus status;
 @property (nonatomic, assign) CGFloat calculateTotalDuration;
-@property (nonatomic, assign) CATransform3D normalTransform3D;
-@property (nonatomic, assign) CGFloat normalAlpha;
 
 //Usually overridden in subclasses
 @property (nonatomic, copy) NSString *animationKey;

@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class MLNBlock;
 @class MLNKeyboardViewHandler;
 @class MLNRenderContext;
+@class MLNTransformTask;
 @interface UIView (MLNKit)
 
 @property (nonatomic, assign) CGFloat lua_x;
@@ -107,6 +108,8 @@ NS_ASSUME_NONNULL_BEGIN
  如果需要就重置Transform
  */
 - (void)lua_resetTransformIfNeed;
+
+- (MLNTransformTask *)lua_getTransform;
 
 @end
 

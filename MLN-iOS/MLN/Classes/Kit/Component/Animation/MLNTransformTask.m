@@ -15,6 +15,7 @@
     if (self = [super init]) {
         _target = targetView;
         _transform = CGAffineTransformIdentity;
+        _alpha = targetView.alpha;
     }
     return self;
 }

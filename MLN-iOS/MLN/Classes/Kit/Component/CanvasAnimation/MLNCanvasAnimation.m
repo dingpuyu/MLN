@@ -81,11 +81,10 @@
 
 - (void)cancel
 {
-    _targetView.layer.transform = _normalTransform3D;
-    _targetView.alpha = _normalAlpha;
+    MLNTransformTask *task = [_targetView lua_getTransform];
+    _targetView.layer.transform = CATransform3DMakeAffineTransform(task.transform);
+    _targetView.alpha = task.alpha;
     [_targetView.layer removeAnimationForKey:self.animationKey];
-    _targetView.layer.transform = self.normalTransform3D;
-    _targetView.alpha = _normalAlpha;
     [[MLNAnimationHandler sharedHandler] removeCallback:self];
     self.status = MLNCanvasAnimationStatusNone;
 }
@@ -215,8 +214,6 @@
 
 - (void)animationRealStart
 {
-    _normalAlpha = _targetView.alpha;
-    _normalTransform3D = _targetView.layer.transform;
     [[MLNAnimationHandler sharedHandler] removeCallback:self];
     self.startTime = CACurrentMediaTime();
     _repeatCounting = 0;
@@ -224,7 +221,8 @@
     if (self.repeatCount) {
         [[MLNAnimationHandler sharedHandler] addCallback:self];
     }
-    _targetView.layer.transform = [self concatTransform3DWith:CATransform3DIdentity];
+    MLNTransformTask *task = [_targetView lua_getTransform];
+    _targetView.layer.transform = [self concatTransform3DWith:CATransform3DMakeAffineTransform(task.transform)];
 }
 
 - (CATransform3D)concatTransform3DWith:(CATransform3D)transform
@@ -258,11 +256,6 @@
 
 - (void)animationStopCallbackFinished:(BOOL)finished
 {
-    if (_autoBack) {
-        _targetView.layer.transform = _normalTransform3D;
-        _targetView.alpha = _normalAlpha;
-    }
-    
     [[MLNAnimationHandler sharedHandler] removeCallback:self];
     MLNBlock *callback = [self.animationCallbacks objectForKey:kAnimationEnd];
     if (callback) {

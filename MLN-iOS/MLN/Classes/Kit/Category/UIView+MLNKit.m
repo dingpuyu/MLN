@@ -527,6 +527,18 @@ static const void *kNeedEndEditing = &kNeedEndEditing;
 }
 
 #pragma mark - Render
+- (void)lua_setAlpha:(CGFloat)alpha
+{
+    if (alpha < 0) {
+        alpha = 0;
+    } else if(alpha > 1) {
+        alpha = 1;
+    }
+    [self setAlpha:alpha];
+    MLNTransformTask *task = [self mln_in_getTransform];
+    task.alpha = alpha;
+}
+
 static const void *kLuaBoarderColor = &kLuaBoarderColor;
 - (void)lua_setBorderColor:(UIColor *)color
 {
@@ -1236,6 +1248,11 @@ static const void *kViewTransform = &kViewTransform;
         objc_setAssociatedObject(self, kViewTransform, transform, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     return transform;
+}
+
+- (MLNTransformTask *)lua_getTransform
+{
+    return [self mln_in_getTransform];
 }
 
 #pragma mark - animtion

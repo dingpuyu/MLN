@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, weak, readonly) UIView *target;
 @property (nonatomic) CGAffineTransform transform;
+@property (nonatomic) CGFloat alpha;
 
 /**
  创建Transform任务
