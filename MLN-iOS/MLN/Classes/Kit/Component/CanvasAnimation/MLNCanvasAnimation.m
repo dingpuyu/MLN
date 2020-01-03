@@ -81,6 +81,8 @@
 
 - (void)cancel
 {
+    _targetView.layer.transform = _normalTransform3D;
+    _targetView.alpha = _normalAlpha;
     [_targetView.layer removeAnimationForKey:self.animationKey];
     _targetView.layer.transform = self.normalTransform3D;
     _targetView.alpha = _normalAlpha;
