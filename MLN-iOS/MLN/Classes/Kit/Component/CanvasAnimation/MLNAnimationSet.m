@@ -74,6 +74,10 @@
 {
     [super animationRealStart];
     for (MLNCanvasAnimation *canvasAnim in self.animationsArray) {
+        canvasAnim.fromSetTargetView = self.targetView;
+        if (canvasAnim.delay == 0) {
+            [canvasAnim setupAnchorPointWithTargetView:self.targetView];
+        }
         [canvasAnim animationRealStart];
     }
 }

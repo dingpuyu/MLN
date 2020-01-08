@@ -29,6 +29,7 @@
 {
     CAAnimationGroup *_animationGroup;
     NSUInteger _repeatCounting;
+    BOOL _realStart;
 }
 
 @property (nonatomic, strong) NSMutableDictionary<NSString *, MLNBlock *> *animationCallbacks;
@@ -173,7 +174,7 @@
             }
             self.status = MLNCanvasAnimationStatusRunning;
             [self animationRealStart];
-            [self setupAnchorPointWithTargetView:_targetView];
+//            [self setupAnchorPointWithTargetView:_targetView];
             [_targetView.layer addAnimation:self.animationGroup forKey:self.animationKey];
         }
             break;
@@ -200,6 +201,12 @@
     }
     CGFloat percent = ((CACurrentMediaTime() - self.startTime) / (self.duration + self.delay));
    
+    if (_delay > 0 && _realStart == NO && CACurrentMediaTime() - self.startTime >= _delay) {
+        UIView *targetView = self.fromSetTargetView?:_targetView;
+        [self setupAnchorPointWithTargetView:targetView];
+        _realStart = YES;
+    }
+    
     NSInteger repeatCount = (NSUInteger)percent;
     if (self.repeatCount > 0 && self.repeatCount <= repeatCount) {
         self.status = MLNCanvasAnimationStatusNone;
@@ -216,11 +223,13 @@
 {
     [[MLNAnimationHandler sharedHandler] removeCallback:self];
     self.startTime = CACurrentMediaTime();
+    _realStart = NO;
     _repeatCounting = 0;
     [self animationStartCallback];
     if (self.repeatCount) {
         [[MLNAnimationHandler sharedHandler] addCallback:self];
     }
+    [self setupAnchorPointWithTargetView:_targetView];
     MLNTransformTask *task = [_targetView lua_getTransform];
     _targetView.layer.transform = [self concatTransform3DWith:CATransform3DMakeAffineTransform(task.transform)];
 }
@@ -297,7 +306,7 @@
     CGFloat anchorY = 0.5;
     switch (_pivotXType) {
         case MLNAnimationValueTypeAbsolute:
-            anchorX = _pivotX / _targetView.bounds.size.width;
+            anchorX = _pivotX / targetView.bounds.size.width;
             break;
         case MLNAnimationValueTypeRelativeToSelf:
             anchorX = _pivotX;
@@ -307,7 +316,7 @@
     }
     switch (_pivotYType) {
         case MLNAnimationValueTypeAbsolute:
-            anchorY = _pivotY / _targetView.bounds.size.height;
+            anchorY = _pivotY / targetView.bounds.size.height;
             break;
         case MLNAnimationValueTypeRelativeToSelf:
             anchorY = _pivotY;

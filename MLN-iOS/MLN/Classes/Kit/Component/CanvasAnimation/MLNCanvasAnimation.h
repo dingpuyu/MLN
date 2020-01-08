@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MLNCanvasAnimation : NSObject <NSCopying, MLNEntityExportProtocol>
 
 @property (nonatomic, weak) UIView *targetView;
+@property (nonatomic, weak) UIView *fromSetTargetView;
 @property (nonatomic, strong, readonly) CAAnimationGroup *animationGroup;
 @property (nonatomic, strong) NSMutableDictionary<NSString *, CABasicAnimation *> *animations;
 @property (nonatomic, assign) MLNAnimationValueType pivotXType;
@@ -56,6 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)animationRepeatCallback:(NSUInteger)repeatCount;
 - (void)animationStopCallbackFinished:(BOOL)finished;
 - (CATransform3D)concatTransform3DWith:(CATransform3D)transform;
+- (void)setupAnchorPointWithTargetView:(UIView *)targetView;
 
 @end
 
