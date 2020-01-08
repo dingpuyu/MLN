@@ -1159,7 +1159,7 @@ static const void *kLuaOnDetachedFromWindowCallback = &kLuaOnDetachedFromWindowC
 {
     MLNKitLuaAssert(x >= 0.0f && x <= 1.0f, @"param x should bigger or equal than 0.0 and smaller or equal than 1.0!");
     MLNKitLuaAssert(y >= 0.0f && y <= 1.0f, @"param y should bigger or equal than 0.0 and smaller or equal than 1.0!");
-    [self.lua_node changeAnchorPoint:CGPointMake(x, y)];
+    [self.mln_renderContext resetAnchorPont:CGPointMake(x, y)];
 }
 
 - (void)lua_transform:(CGFloat)angle adding:(NSNumber *)add

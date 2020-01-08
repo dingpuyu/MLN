@@ -17,7 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak, readonly) UIView *targetView;
 @property (nonatomic, assign) BOOL clipToBounds;
 @property (nonatomic, assign) BOOL didSetClipToBounds;
+@property (nonatomic, assign, readonly) CGPoint anchorPoint;
 
+- (void)resetAnchorPont:(CGPoint)anchorPoint;
 - (void)resetCornerRadius:(CGFloat)cornerRadius;
 - (void)resetCornerRadius:(CGFloat)cornerRadius byRoundingCorners:(MLNRectCorner)corners;
 - (void)resetCornerMaskViewWithRadius:(CGFloat)cornerRadius maskColor:(UIColor *)maskColor corners:(UIRectCorner)corners;

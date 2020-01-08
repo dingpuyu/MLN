@@ -84,10 +84,6 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) CGFloat offsetWidth;
 @property (nonatomic, assign) CGFloat offsetHeight;
 //*******
-//******                anchorPoint
-//*****
-@property (nonatomic, assign, readonly) CGPoint anchorPoint;
-//*******
 //******                State
 //*****
 @property (nonatomic, assign, readonly) MLNLayoutStrategy layoutStrategy;
@@ -154,7 +150,6 @@ typedef enum : NSUInteger {
 - (void)changeY:(CGFloat)y;
 - (void)changeWidth:(CGFloat)width;
 - (void)changeHeight:(CGFloat)height;
-- (void)changeAnchorPoint:(CGPoint)point;
 - (void)updateTargetViewFrameIfNeed;
 - (void)needLayout;
 - (void)needLayoutAndSpread;

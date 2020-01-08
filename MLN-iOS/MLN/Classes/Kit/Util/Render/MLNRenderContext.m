@@ -9,6 +9,7 @@
 #import "MLNGradientLayerOperation.h"
 #import "MLNShadowOperation.h"
 #import "MLNBorderLayerOperation.h"
+#import "MLNAnchorPointOperation.h"
 #import "MLNBeforeWaitingTask.h"
 #import "MLNCornerManagerFactory.h"
 #import "UIView+MLNKit.h"
@@ -23,6 +24,7 @@
 @property (nonatomic, strong) MLNGradientLayerOperation *gradientLayerOperation;
 @property (nonatomic, strong) MLNShadowOperation *shadowOperation;
 @property (nonatomic, strong) MLNBorderLayerOperation *borderOperation;
+@property (nonatomic, strong) MLNAnchorPointOperation *anchorPointOperation;
 
 @property (nonatomic, strong) MLNBeforeWaitingTask *beforeWaitingTask;
 
@@ -36,6 +38,18 @@
         _clipToBounds = targetView.clipsToBounds;
     }
     return self;
+}
+
+#pragma mark - anchorPoint
+- (CGPoint)anchorPoint
+{
+    return self.anchorPointOperation.anchorPoint;
+}
+
+- (void)resetAnchorPont:(CGPoint)anchorPoint
+{
+    [self.anchorPointOperation updateAnchorPoint:anchorPoint];
+    [self.targetView mln_pushRenderTask:self.beforeWaitingTask];
 }
 
 #pragma mark - Corner
@@ -138,6 +152,7 @@
 #pragma mark - Before Waiting Task
 - (void)doTask
 {
+    [self.anchorPointOperation remakeIfNeed];
     [self doCornerTask];
     [self.gradientLayerOperation remakeIfNeed];
     MLNCornerRadius radius = [self currentCornerRadiusWithCornerMode:self.newCornerMode];
@@ -218,6 +233,14 @@
         _borderOperation = [[MLNBorderLayerOperation alloc] initWithTargetView:self.targetView];
     }
     return _borderOperation;
+}
+
+- (MLNAnchorPointOperation *)anchorPointOperation
+{
+    if (!_anchorPointOperation) {
+        _anchorPointOperation = [[MLNAnchorPointOperation alloc] initWithTargetView:self.targetView];
+    }
+    return _anchorPointOperation;
 }
 
 @end
