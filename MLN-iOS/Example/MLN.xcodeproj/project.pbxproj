@@ -74,6 +74,10 @@
 		B2DD3E60237990E9002AB6AD /* MLNActionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DD3E55237990E9002AB6AD /* MLNActionItem.m */; };
 		B2DD3E61237990E9002AB6AD /* MLNControlContext.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DD3E56237990E9002AB6AD /* MLNControlContext.m */; };
 		B2DD3E62237990E9002AB6AD /* MLNActionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DD3E58237990E9002AB6AD /* MLNActionManager.m */; };
+		FA16E98423D43AC000A12F15 /* MLNAPIBase.m in Sources */ = {isa = PBXBuildFile; fileRef = FA16E98323D43ABF00A12F15 /* MLNAPIBase.m */; };
+		FA16E98723D440C800A12F15 /* MLNHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FA16E98623D440C800A12F15 /* MLNHTTPSessionManager.m */; };
+		FA16E98A23D445BF00A12F15 /* MLNAPIParam.m in Sources */ = {isa = PBXBuildFile; fileRef = FA16E98923D445BF00A12F15 /* MLNAPIParam.m */; };
+		FA16E98E23D587DC00A12F15 /* MLNFileSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = FA16E98D23D587DB00A12F15 /* MLNFileSummary.m */; };
 		FA383453239A4C61000F900E /* MLNHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA383452239A4C61000F900E /* MLNHomeViewController.m */; };
 		FA383456239A6357000F900E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA383454239A6356000F900E /* Main.storyboard */; };
 		FA383459239A64AF000F900E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA383457239A64AF000F900E /* LaunchScreen.storyboard */; };
@@ -238,6 +242,15 @@
 		C0FB2CAC8F9592C3092ACF62 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		F236AA5C6B666135B994F09B /* Pods-MLN_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLN_Example.debug.xcconfig"; path = "Target Support Files/Pods-MLN_Example/Pods-MLN_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		F690E0F94A4E45F3BA4BF4B2 /* libPods-LuaNative.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LuaNative.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA16E98223D43ABF00A12F15 /* MLNAPIBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLNAPIBase.h; sourceTree = "<group>"; };
+		FA16E98323D43ABF00A12F15 /* MLNAPIBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLNAPIBase.m; sourceTree = "<group>"; };
+		FA16E98523D440C800A12F15 /* MLNHTTPSessionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLNHTTPSessionManager.h; sourceTree = "<group>"; };
+		FA16E98623D440C800A12F15 /* MLNHTTPSessionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLNHTTPSessionManager.m; sourceTree = "<group>"; };
+		FA16E98823D445BF00A12F15 /* MLNAPIParam.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLNAPIParam.h; sourceTree = "<group>"; };
+		FA16E98923D445BF00A12F15 /* MLNAPIParam.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLNAPIParam.m; sourceTree = "<group>"; };
+		FA16E98B23D54CEB00A12F15 /* MLNChunkDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLNChunkDelegate.h; sourceTree = "<group>"; };
+		FA16E98C23D587DB00A12F15 /* MLNFileSummary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLNFileSummary.h; sourceTree = "<group>"; };
+		FA16E98D23D587DB00A12F15 /* MLNFileSummary.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLNFileSummary.m; sourceTree = "<group>"; };
 		FA383451239A4C61000F900E /* MLNHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLNHomeViewController.h; sourceTree = "<group>"; };
 		FA383452239A4C61000F900E /* MLNHomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLNHomeViewController.m; sourceTree = "<group>"; };
 		FA383455239A6356000F900E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -356,6 +369,7 @@
 				FA38349A239B5A4C000F900E /* MLNDemoListViewController.m */,
 				B2DD3E4D237990E8002AB6AD /* MLNLuaPageViewController.h */,
 				B2DD3E4E237990E8002AB6AD /* MLNLuaPageViewController.m */,
+				FA16E98123D43ABF00A12F15 /* MLNNetwork */,
 				FAE9C59723A2603F002C830D /* Handler */,
 				FAE9C59623A2600B002C830D /* BridgeTest */,
 				B2DD3E54237990E9002AB6AD /* MLNActionManager */,
@@ -672,6 +686,22 @@
 			path = MLNActionManager;
 			sourceTree = "<group>";
 		};
+		FA16E98123D43ABF00A12F15 /* MLNNetwork */ = {
+			isa = PBXGroup;
+			children = (
+				FA16E98223D43ABF00A12F15 /* MLNAPIBase.h */,
+				FA16E98323D43ABF00A12F15 /* MLNAPIBase.m */,
+				FA16E98823D445BF00A12F15 /* MLNAPIParam.h */,
+				FA16E98923D445BF00A12F15 /* MLNAPIParam.m */,
+				FA16E98C23D587DB00A12F15 /* MLNFileSummary.h */,
+				FA16E98D23D587DB00A12F15 /* MLNFileSummary.m */,
+				FA16E98523D440C800A12F15 /* MLNHTTPSessionManager.h */,
+				FA16E98623D440C800A12F15 /* MLNHTTPSessionManager.m */,
+				FA16E98B23D54CEB00A12F15 /* MLNChunkDelegate.h */,
+			);
+			path = MLNNetwork;
+			sourceTree = "<group>";
+		};
 		FA4EE3042379093000449250 /* BottomCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -931,6 +961,7 @@
 				B2DD3E60237990E9002AB6AD /* MLNActionItem.m in Sources */,
 				6003F59E195388D20070C39A /* MLNAppDelegate.m in Sources */,
 				B27F65DD2377AB0700F2D341 /* MLNGalleryNavigationBar.m in Sources */,
+				FA16E98A23D445BF00A12F15 /* MLNAPIParam.m in Sources */,
 				B29500F72372D5B400F48F09 /* MLNSimpleViewPagerCell.m in Sources */,
 				B29500D92372627000F48F09 /* MLNNativeTabSegmentScrollHandler.m in Sources */,
 				B27F65AE2377AA9700F2D341 /* MLNDiscoverInspirCategoryView.m in Sources */,
@@ -944,6 +975,7 @@
 				B27F65C52377AAAE00F2D341 /* MLNGalleryMessageBaseCellModel.m in Sources */,
 				FA4EE30A2379099700449250 /* MLNGalleryMineBottomPageHomeCell.m in Sources */,
 				B27F65AC2377AA9700F2D341 /* MLNNativeWaterfallHeaderView.m in Sources */,
+				FA16E98E23D587DC00A12F15 /* MLNFileSummary.m in Sources */,
 				30A4EB60231CD75200995416 /* MLNMyRefreshHandler.m in Sources */,
 				30A4EB5D231CC86B00995416 /* MLNMyImageHandler.m in Sources */,
 				30E24E9622F3D74A00A0E78C /* MLNGlobalVarTest.m in Sources */,
@@ -965,6 +997,7 @@
 				B27F65CD2377AAAE00F2D341 /* MLNGalleryMessageDetailViewController.m in Sources */,
 				B2D0ABB52370136000B1D349 /* MLNGalleryViewController.m in Sources */,
 				B27F65D72377AAC400F2D341 /* MLNGalleryHomeViewController.m in Sources */,
+				FA16E98723D440C800A12F15 /* MLNHTTPSessionManager.m in Sources */,
 				FA38349B239B5A4C000F900E /* MLNDemoListViewController.m in Sources */,
 				FA4EE2FA2379067000449250 /* MLNGalleryMinePageCellBaseModel.m in Sources */,
 				B27F65AF2377AA9700F2D341 /* MLNNativeWaterfallLayout.m in Sources */,
@@ -979,6 +1012,7 @@
 				B27F65912377AA6C00F2D341 /* MLNGalleryMineViewController.m in Sources */,
 				B27F65CA2377AAAE00F2D341 /* MLNGalleryMessageBaseCell.m in Sources */,
 				B2DD3E5F237990E9002AB6AD /* MLNPackageManager.m in Sources */,
+				FA16E98423D43AC000A12F15 /* MLNAPIBase.m in Sources */,
 				B27F65E12377AB1600F2D341 /* MLNGalleryPlusViewController.m in Sources */,
 				B27F65A82377AA9700F2D341 /* MLNGalleryDiscoverViewController.m in Sources */,
 			);
