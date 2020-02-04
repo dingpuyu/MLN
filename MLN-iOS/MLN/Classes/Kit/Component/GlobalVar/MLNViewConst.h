@@ -16,7 +16,7 @@ typedef NS_OPTIONS(NSUInteger, MLNRectCorner)  {
     MLNRectCornerTopRight = 1<<1,
     MLNRectCornerBottomLeft = 1<<2,
     MLNRectCornerBottomRight = 1<<3,
-    MLNRectCornerAllCorners  = ~0UL
+    MLNRectCornerAllCorners  = 15
 };
 
 static const NSUInteger MLN_AXIS_SPECIFIED = 0x0001;
