@@ -1,0 +1,1 @@
+../../../GCanvas/GCanvas/core/src/GCanvasManager.h

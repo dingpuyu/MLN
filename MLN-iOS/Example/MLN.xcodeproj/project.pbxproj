@@ -74,6 +74,8 @@
 		B2DD3E60237990E9002AB6AD /* MLNActionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DD3E55237990E9002AB6AD /* MLNActionItem.m */; };
 		B2DD3E61237990E9002AB6AD /* MLNControlContext.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DD3E56237990E9002AB6AD /* MLNControlContext.m */; };
 		B2DD3E62237990E9002AB6AD /* MLNActionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DD3E58237990E9002AB6AD /* MLNActionManager.m */; };
+		FA1F76F02420F475002AD5F8 /* MLNGCanvasModule.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1F76EF2420F474002AD5F8 /* MLNGCanvasModule.m */; };
+		FA1F76F32420F580002AD5F8 /* MLNGCanvasComponentView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1F76F22420F580002AD5F8 /* MLNGCanvasComponentView.m */; };
 		FA383453239A4C61000F900E /* MLNHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA383452239A4C61000F900E /* MLNHomeViewController.m */; };
 		FA383456239A6357000F900E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA383454239A6356000F900E /* Main.storyboard */; };
 		FA383459239A64AF000F900E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA383457239A64AF000F900E /* LaunchScreen.storyboard */; };
@@ -238,6 +240,10 @@
 		C0FB2CAC8F9592C3092ACF62 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		F236AA5C6B666135B994F09B /* Pods-MLN_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLN_Example.debug.xcconfig"; path = "Target Support Files/Pods-MLN_Example/Pods-MLN_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		F690E0F94A4E45F3BA4BF4B2 /* libPods-LuaNative.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LuaNative.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA1F76EE2420F474002AD5F8 /* MLNGCanvasModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLNGCanvasModule.h; sourceTree = "<group>"; };
+		FA1F76EF2420F474002AD5F8 /* MLNGCanvasModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLNGCanvasModule.m; sourceTree = "<group>"; };
+		FA1F76F12420F580002AD5F8 /* MLNGCanvasComponentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLNGCanvasComponentView.h; sourceTree = "<group>"; };
+		FA1F76F22420F580002AD5F8 /* MLNGCanvasComponentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLNGCanvasComponentView.m; sourceTree = "<group>"; };
 		FA383451239A4C61000F900E /* MLNHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLNHomeViewController.h; sourceTree = "<group>"; };
 		FA383452239A4C61000F900E /* MLNHomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLNHomeViewController.m; sourceTree = "<group>"; };
 		FA383455239A6356000F900E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -356,6 +362,7 @@
 				FA38349A239B5A4C000F900E /* MLNDemoListViewController.m */,
 				B2DD3E4D237990E8002AB6AD /* MLNLuaPageViewController.h */,
 				B2DD3E4E237990E8002AB6AD /* MLNLuaPageViewController.m */,
+				FA1F76ED2420F44D002AD5F8 /* MLNCanvas */,
 				FAE9C59723A2603F002C830D /* Handler */,
 				FAE9C59623A2600B002C830D /* BridgeTest */,
 				B2DD3E54237990E9002AB6AD /* MLNActionManager */,
@@ -672,6 +679,17 @@
 			path = MLNActionManager;
 			sourceTree = "<group>";
 		};
+		FA1F76ED2420F44D002AD5F8 /* MLNCanvas */ = {
+			isa = PBXGroup;
+			children = (
+				FA1F76F12420F580002AD5F8 /* MLNGCanvasComponentView.h */,
+				FA1F76F22420F580002AD5F8 /* MLNGCanvasComponentView.m */,
+				FA1F76EE2420F474002AD5F8 /* MLNGCanvasModule.h */,
+				FA1F76EF2420F474002AD5F8 /* MLNGCanvasModule.m */,
+			);
+			path = MLNCanvas;
+			sourceTree = "<group>";
+		};
 		FA4EE3042379093000449250 /* BottomCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -927,6 +945,7 @@
 				FA4EE3032379086F00449250 /* MLNGalleryMinePageCellCollectModel.m in Sources */,
 				B2DD3E61237990E9002AB6AD /* MLNControlContext.m in Sources */,
 				FA4EE3002379080100449250 /* MLNGalleryMinePageCellDynamicModel.m in Sources */,
+				FA1F76F02420F475002AD5F8 /* MLNGCanvasModule.m in Sources */,
 				B27F65902377AA6C00F2D341 /* MLNGalleryMineHeaderView.m in Sources */,
 				B2DD3E60237990E9002AB6AD /* MLNActionItem.m in Sources */,
 				6003F59E195388D20070C39A /* MLNAppDelegate.m in Sources */,
@@ -978,6 +997,7 @@
 				FA4EE310237909BC00449250 /* MLNGalleryMineBottomPageCollectCell.m in Sources */,
 				B27F65912377AA6C00F2D341 /* MLNGalleryMineViewController.m in Sources */,
 				B27F65CA2377AAAE00F2D341 /* MLNGalleryMessageBaseCell.m in Sources */,
+				FA1F76F32420F580002AD5F8 /* MLNGCanvasComponentView.m in Sources */,
 				B2DD3E5F237990E9002AB6AD /* MLNPackageManager.m in Sources */,
 				B27F65E12377AB1600F2D341 /* MLNGalleryPlusViewController.m in Sources */,
 				B27F65A82377AA9700F2D341 /* MLNGalleryDiscoverViewController.m in Sources */,

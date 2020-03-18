@@ -1,0 +1,1 @@
+../../../GCanvas/GCanvas/ios/Classes/GCanvasModuleProtocol.h
