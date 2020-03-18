@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MLNGCanvasComponentView : MLNView <GCanvasViewProtocol>
+@interface MLNGCanvasComponentView : MLNView <GCanvasViewProtocol, MLNEntityExportProtocol>
 
 @property (nonatomic, strong, readonly) GLKView* glkview;
 @property (nonatomic, assign, readonly) CGRect componetFrame;

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		112C50D76F2A49BC8742D484 /* libPods-LuaNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F690E0F94A4E45F3BA4BF4B2 /* libPods-LuaNative.a */; };
+		2AD5B6CD24225FC10057FCEB /* MLNCanvasViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD5B6CC24225FC10057FCEB /* MLNCanvasViewManager.m */; };
 		3012BB102326822F00FA2BB2 /* MLNNavigatorHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 3012BB0F2326822F00FA2BB2 /* MLNNavigatorHandler.m */; };
 		30A4EB5A231CC5CD00995416 /* MLNMyHttpHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 30A4EB59231CC5CD00995416 /* MLNMyHttpHandler.m */; };
 		30A4EB5D231CC86B00995416 /* MLNMyImageHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 30A4EB5C231CC86B00995416 /* MLNMyImageHandler.m */; };
@@ -107,6 +108,8 @@
 		02612459D91635274DB7C591 /* libPods-MLN_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MLN_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BFEA11F75FC7C356E75DFD6 /* Pods-MLN_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLN_Example.release.xcconfig"; path = "Target Support Files/Pods-MLN_Example/Pods-MLN_Example.release.xcconfig"; sourceTree = "<group>"; };
 		1018AD05C0E113C32A1AD38C /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		2AD5B6CB24225FC10057FCEB /* MLNCanvasViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLNCanvasViewManager.h; sourceTree = "<group>"; };
+		2AD5B6CC24225FC10057FCEB /* MLNCanvasViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLNCanvasViewManager.m; sourceTree = "<group>"; };
 		3012BB0E2326822F00FA2BB2 /* MLNNavigatorHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLNNavigatorHandler.h; sourceTree = "<group>"; };
 		3012BB0F2326822F00FA2BB2 /* MLNNavigatorHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLNNavigatorHandler.m; sourceTree = "<group>"; };
 		30A4EB58231CC5CD00995416 /* MLNMyHttpHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLNMyHttpHandler.h; sourceTree = "<group>"; };
@@ -686,6 +689,8 @@
 				FA1F76F22420F580002AD5F8 /* MLNGCanvasComponentView.m */,
 				FA1F76EE2420F474002AD5F8 /* MLNGCanvasModule.h */,
 				FA1F76EF2420F474002AD5F8 /* MLNGCanvasModule.m */,
+				2AD5B6CB24225FC10057FCEB /* MLNCanvasViewManager.h */,
+				2AD5B6CC24225FC10057FCEB /* MLNCanvasViewManager.m */,
 			);
 			path = MLNCanvas;
 			sourceTree = "<group>";
@@ -983,6 +988,7 @@
 				B27F658F2377AA6C00F2D341 /* MLNGalleryMineInfoViewModel.m in Sources */,
 				B27F65CD2377AAAE00F2D341 /* MLNGalleryMessageDetailViewController.m in Sources */,
 				B2D0ABB52370136000B1D349 /* MLNGalleryViewController.m in Sources */,
+				2AD5B6CD24225FC10057FCEB /* MLNCanvasViewManager.m in Sources */,
 				B27F65D72377AAC400F2D341 /* MLNGalleryHomeViewController.m in Sources */,
 				FA38349B239B5A4C000F900E /* MLNDemoListViewController.m in Sources */,
 				FA4EE2FA2379067000449250 /* MLNGalleryMinePageCellBaseModel.m in Sources */,

@@ -39,6 +39,8 @@
 @property (nonatomic, strong) MLNHotReloadViewController *luaVC;
 @property (nonatomic, strong) MLNOfflineViewController *offlineViewController;
 
+@property (nonatomic, strong) MLNGCanvasModule *module;
+
 @end
 
 @implementation MLNHomeViewController
@@ -46,12 +48,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    MLNGCanvasComponentView *componentView = [[MLNGCanvasComponentView alloc] initWithFrame:CGRectMake(0, 100, 300, 300)];
-    componentView.backgroundColor = [UIColor lightGrayColor];
-    [self.view addSubview:componentView];
-    MLNGCanvasModule *module = [[MLNGCanvasModule alloc] init];
-    module.testView = componentView;
-    [module testDraw];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -73,7 +69,7 @@
 #pragma mark - action
 
 - (IBAction)hotReloadAction:(id)sender {
-    MLNHotReloadViewController  *hotReloadVC = [[MLNHotReloadViewController alloc] initWithRegisterClasses:@[[MLNStaticTest class]] extraInfo:nil];
+    MLNHotReloadViewController  *hotReloadVC = [[MLNHotReloadViewController alloc] initWithRegisterClasses:@[[MLNGCanvasComponentView class], [MLNGCanvasModule class]] extraInfo:nil];
     [self.navigationController pushViewController:hotReloadVC animated:YES];
 }
 

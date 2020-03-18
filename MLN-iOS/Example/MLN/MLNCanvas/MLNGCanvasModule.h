@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "MLNGCanvasComponentView.h"
+#import <MLNCore.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MLNGCanvasModule : NSObject
+@interface MLNGCanvasModule : NSObject <MLNEntityExportProtocol>
 
 @property (nonatomic, weak) MLNGCanvasComponentView *testView;
 
