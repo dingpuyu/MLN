@@ -124,10 +124,7 @@
 - (id<GCanvasViewProtocol>)gcanvasComponentById:(NSString*)componentId{
     MLNCanvasViewManager *uiManager = [MLNCanvasViewManager sharedManager];
     
-    __block NSObject<GCanvasViewProtocol> *view = nil;
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        view = [uiManager canvasViewWithComponentId:componentId];
-    });
+    NSObject<GCanvasViewProtocol> *view = [uiManager canvasViewWithComponentId:componentId];
     if ( [view isKindOfClass: [MLNGCanvasComponentView class]] ){
         return (MLNGCanvasComponentView*)view;
     }

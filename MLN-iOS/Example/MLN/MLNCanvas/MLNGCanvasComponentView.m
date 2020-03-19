@@ -44,6 +44,14 @@
     return self;
 }
 
+- (instancetype)initWithLuaCore:(MLNLuaCore *)luaCore
+{
+    if (self = [self initWithLuaCore:luaCore frame:CGRectZero]) {
+        
+    }
+    return self;
+}
+
 - (void)dealloc{
     [EAGLContext setCurrentContext:nil];
 }
@@ -73,6 +81,14 @@
 
 #pragma mark - Getter
 
+- (void)lua_paddingUpdated
+{
+    [super lua_paddingUpdated];
+    
+    _componetFrame = self.glkview.frame;
+    _viewSize = _componetFrame.size;
+}
+
 #pragma mark - Overrid For Lua
 - (UIView *)lua_contentView
 {
@@ -83,6 +99,6 @@
 
 
 LUA_EXPORT_VIEW_BEGIN(MLNGCanvasComponentView)
-LUA_EXPORT_VIEW_METHOD(componentId, "componentId", MLNCanvasView)
+LUA_EXPORT_VIEW_METHOD(componentId, "componentId", MLNGCanvasComponentView)
 LUA_EXPORT_VIEW_END(MLNGCanvasComponentView, GCanvasView, YES, "MLNView", NULL)
 @end
