@@ -39,6 +39,7 @@
 #import "MLNViewPagerAdapter.h"
 #import "MLNTabSegmentView.h"
 #import "MLNCollectionViewGridLayoutFix.h"
+#import "MLNCollectionLayout.h"
 #import "MLNWaterfallLayoutFix.h"
 // Kit Classes's Model
 #import "MLNRect.h"
@@ -141,6 +142,7 @@ static NSArray<Class<MLNExportProtocol>> *viewClasses;
                         [MLNCollectionViewAutoFitAdapter class],
                         [MLNCollectionViewGridLayout class],
                         [MLNCollectionViewGridLayoutFix class],
+                        [MLNCollectionLayout class],
                         [MLNWaterfallView class],
                         [MLNWaterfallLayout class],
                         [MLNWaterfallLayoutFix class],
