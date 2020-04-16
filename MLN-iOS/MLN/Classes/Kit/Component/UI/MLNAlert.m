@@ -63,7 +63,7 @@ typedef enum : NSUInteger {
 
 - (void)lua_setSingle:(NSString *)single callback:(MLNBlock *)callback
 {
-    MLNCheckTypeAndNilValue(single, @"string", [NSMutableArray class])
+    MLNCheckTypeAndNilValue(single, @"string", [NSString class])
     MLNCheckTypeAndNilValue(callback, @"function", MLNBlock)
     self.type = MLNAlertTypeSingle;
     self.singleTitle = single;

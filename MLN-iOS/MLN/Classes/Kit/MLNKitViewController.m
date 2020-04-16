@@ -115,6 +115,7 @@
     if ([self.delegate respondsToSelector:@selector(kitViewController:viewWillAppear:)]) {
         [self.delegate kitViewController:self viewWillAppear:animated];
     }
+    [self.kitInstance doLuaWindowWillAppear];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -134,6 +135,7 @@
     if ([self.delegate respondsToSelector:@selector(kitViewController:viewWillDisappear:)]) {
         [self.delegate kitViewController:self viewWillDisappear:animated];
     }
+    [self.kitInstance doLuaWindowWillDisAppear];
 }
 
 - (void)viewDidDisappear:(BOOL)animated

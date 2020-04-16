@@ -72,6 +72,25 @@
     [self _dismissDialogView];
 }
 
+- (void)hiden {
+    if (self.contentWindow.hidden == YES) {
+        return;
+    }
+    MLNWindowContext *context = [MLNWindowContext sharedContext];
+    [context removeWithWindow:self.contentWindow];
+    [self.contentWindow resignKeyWindow];
+    self.contentWindow.hidden = YES;
+}
+
+- (void)show {
+    if (self.contentWindow.hidden == NO) {
+        return;
+    }
+    [[MLNWindowContext sharedContext] pushKeyWindow:[UIApplication sharedApplication].keyWindow];
+    self.contentWindow.hidden = NO;
+    [self.contentWindow makeKeyWindow];
+}
+
 - (void)lua_setContent:(UIView *)view
 {
     MLNCheckTypeAndNilValue(view, @"View", [UIView class])
@@ -134,6 +153,7 @@
     [[MLNWindowContext sharedContext] pushKeyWindow:[UIApplication sharedApplication].keyWindow];
     self.contentWindow.hidden = NO;
     [self.contentWindow makeKeyWindow];
+    [MLN_KIT_INSTANCE(self.mln_luaCore) attatchDialogView:self];
 }
 
 - (void)_dismissDialogView
@@ -148,6 +168,7 @@
     [topWindw makeKeyWindow];
     _contentWindow.hidden = YES;
     [self _lua_didDisappear];
+    [MLN_KIT_INSTANCE(self.mln_luaCore) detachDialogView];
 }
 
 - (void)contentWindowClicked:(UIGestureRecognizer *)gesture
@@ -184,6 +205,26 @@
 - (void)lua_setContentGravity:(MLNGravity)gravity
 {
     _didSetGravity = YES;
+    switch (gravity) {
+        case MLNGravityTop:
+        case MLNGravityBottom:
+        {
+            gravity |= MLNGravityCenterHorizontal;
+        }
+            break;
+        case MLNGravityLeft:
+        case MLNGravityRight:
+        {
+            gravity |= MLNGravityCenterVertical;
+        }
+            break;
+        case MLNGravityNone: {
+            gravity = MLNGravityCenter;
+        }
+            break;
+        default:
+            break;
+    }
     _contentGravity = gravity;
     self.fromLuaView.lua_gravity = gravity;
 }
@@ -237,6 +278,6 @@ LUA_EXPORT_VIEW_METHOD(dialogDisAppear, "lua_setDisappearBlock:", MLNDialogView)
 LUA_EXPORT_VIEW_METHOD(setContent, "lua_setContent:", MLNDialogView)
 LUA_EXPORT_VIEW_METHOD(setDimAmount, "lua_setDimAmount:", MLNDialogView)
 LUA_EXPORT_VIEW_METHOD(setContentGravity, "lua_setContentGravity:", MLNDialogView)
-LUA_EXPORT_VIEW_END(MLNDialogView, Dialog, YES, "MLNView", "initWithLuaCore:frame:")
+LUA_EXPORT_VIEW_END(MLNDialogView, Dialog, NO, NULL, "initWithLuaCore:frame:")
 
 @end

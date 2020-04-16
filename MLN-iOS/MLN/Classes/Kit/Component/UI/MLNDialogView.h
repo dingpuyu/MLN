@@ -11,6 +11,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MLNDialogView : MLNView
 
+- (void)show;
+- (void)hiden;
+
 
 @end
 

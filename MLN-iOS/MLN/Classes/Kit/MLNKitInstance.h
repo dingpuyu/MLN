@@ -19,6 +19,7 @@ typedef void (^MLNOnDestroyCallback)(void);
 NS_ASSUME_NONNULL_BEGIN
 @class MLNLuaCore;
 @class MLNWindow;
+@class MLNDialogView;
 @class MLNLuaTable;
 @class MLNLuaBundle;
 @class MLNExporter;
@@ -277,10 +278,18 @@ Lua中的根视图。
 @interface MLNKitInstance (LuaWindow)
 
 /**
+标记并通知LuaWindow将要展示
+*/
+- (void)doLuaWindowWillAppear;
+/**
  标记并通知LuaWindow已经展示
  */
 - (void)doLuaWindowDidAppear;
 
+/**
+标记并通知LuaWindow将要消失
+*/
+- (void)doLuaWindowWillDisAppear;
 /**
  标记并通知LuaWindow已经消失
  */
@@ -292,6 +301,16 @@ Lua中的根视图。
  @param newSize 新的大小
  */
 - (void)changeLuaWindowSize:(CGSize)newSize;
+
+/**
+ 绑定DialogView，在页面消失时隐藏，在页面展示时展示
+*/
+- (void)attatchDialogView:(MLNDialogView *)dialogView;
+
+/**
+ 解绑定DialogView
+*/
+- (void)detachDialogView;
 
 @end
 

@@ -26,6 +26,7 @@
     MLNLuaCore *_luaCore;
     MLNLayoutEngine *_layoutEngine;
     MLNWindow *_luaWindow;
+    MLNDialogView *_dialogView;
 }
 @property (nonatomic, strong) id<MLNKitLuaCoeBuilderProtocol> luaCoreBuilder;
 @property (nonatomic, strong) NSMutableArray<Class<MLNExportProtocol>> *innerRegisterClasses;
@@ -69,9 +70,15 @@
     [self.layoutEngine addRootnode:node];
 }
 
+- (void)doLuaWindowWillAppear
+{
+    [_dialogView show];
+}
+
 - (void)doLuaWindowDidAppear
 {
     self.didViewAppear = YES;
+    [_dialogView show];
     if (self.luaWindow && [self.luaWindow canDoLuaViewDidAppear]) {
         [self.luaWindow doLuaViewDidAppear];
         self.needCallAppear = NO;
@@ -80,10 +87,16 @@
     self.needCallAppear = YES;
 }
 
+- (void)doLuaWindowWillDisAppear
+{
+    [_dialogView hiden];
+}
+
 - (void)redoLuaViewDidAppearIfNeed
 {
     if (self.needCallAppear && self.didViewAppear) {
         [self.luaWindow doLuaViewDidAppear];
+        [_dialogView show];
     }
 }
 
@@ -101,6 +114,16 @@
     newFrame.size.width = newSize.width;
     newFrame.size.height = newSize.height;
     self.luaWindow.frame = newFrame;
+}
+
+- (void)attatchDialogView:(MLNDialogView *)dialogView
+{
+    _dialogView = dialogView;
+}
+
+- (void)detachDialogView
+{
+    _dialogView = nil;
 }
 
 @end

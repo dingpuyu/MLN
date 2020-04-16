@@ -19,6 +19,7 @@
 
 @property (nonatomic, strong) UIView *containerView;
 @property (nonatomic, strong) UILabel *msgLabel;
+@property (nonatomic, strong) UIWindow *containerWindow;
 @property (nonatomic, assign) BOOL isShowing;
 
 @end
@@ -115,11 +116,13 @@
 - (void)setupContainerViewWithSize:(CGSize)size
 {
     CGFloat bothOfPadding = kToastDefaultPadding *2;
-    UIWindow *window = [UIApplication sharedApplication].keyWindow;
-    UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, size.width + bothOfPadding, size.height + bothOfPadding)];
-    containerView.center = window.center;
+    size.width += bothOfPadding;
+    size.height += bothOfPadding;
+    UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, size.width, size.height)];
     containerView.alpha = 0.f;
-    [window addSubview:containerView];
+
+    [self setupContainerWindowIfNeed:size];
+    [_containerWindow addSubview:containerView];
     // background layer
     CAShapeLayer *backLayer = [CAShapeLayer layer];
     backLayer.frame = containerView.bounds;
@@ -127,6 +130,19 @@
     backLayer.fillColor = kToastDefaultBackColor.CGColor;
     [containerView.layer addSublayer:backLayer];
     self.containerView = containerView;
+}
+
+- (void)setupContainerWindowIfNeed:(CGSize)size;
+{
+    if (_containerWindow == nil || !CGSizeEqualToSize(_containerWindow.frame.size, size)) {
+        _containerWindow = nil;
+        CGSize screenSize = [UIScreen mainScreen].bounds.size;
+        UIWindow *containerWindow = [[UIWindow alloc] initWithFrame:CGRectMake((screenSize.width - size.width)/2.0, (screenSize.height - size.height)/2.0, size.width, size.height)];
+        containerWindow.userInteractionEnabled = NO;
+        containerWindow.windowLevel = UIWindowLevelAlert + 1;
+        containerWindow.hidden = NO;
+        _containerWindow = containerWindow;
+    }
 }
 
 - (void)setupMsgLabelWithSize:(CGSize)size msg:(NSString *)msg
@@ -159,6 +175,8 @@
 - (void)unloadUI
 {
     [self.containerView removeFromSuperview];
+    _containerWindow.hidden = YES;
+    _containerWindow = nil;
 }
 
 #pragma mark - Notifaction
