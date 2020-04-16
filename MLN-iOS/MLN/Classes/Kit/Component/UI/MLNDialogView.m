@@ -79,6 +79,11 @@
     MLNWindowContext *context = [MLNWindowContext sharedContext];
     [context removeWithWindow:self.contentWindow];
     [self.contentWindow resignKeyWindow];
+    UIWindow *topWindw = nil;
+     do{
+        topWindw = [context popKeyWindow];
+     } while (topWindw.hidden == YES && topWindw != nil);
+    [topWindw makeKeyWindow];
     self.contentWindow.hidden = YES;
 }
 
@@ -149,17 +154,18 @@
         [self initAdjustPosition];
     }
     [MLN_KIT_INSTANCE(self.mln_luaCore) addRootnode:(MLNLayoutContainerNode *)self.lua_node];
+    [MLN_KIT_INSTANCE(self.mln_luaCore) attatchDialogView:self];
     [self.contentWindow addSubview:self];
     [[MLNWindowContext sharedContext] pushKeyWindow:[UIApplication sharedApplication].keyWindow];
     self.contentWindow.hidden = NO;
     [self.contentWindow makeKeyWindow];
-    [MLN_KIT_INSTANCE(self.mln_luaCore) attatchDialogView:self];
 }
 
 - (void)_dismissDialogView
 {
     MLNWindowContext *context = [MLNWindowContext sharedContext];
     [MLN_KIT_INSTANCE(self.mln_luaCore) removeRootNode:(MLNLayoutContainerNode *)self.lua_node];
+    [MLN_KIT_INSTANCE(self.mln_luaCore) detachDialogView];
     [context removeWithWindow:self.contentWindow];
     UIWindow *topWindw = nil;
      do{
@@ -168,15 +174,6 @@
     [topWindw makeKeyWindow];
     _contentWindow.hidden = YES;
     [self _lua_didDisappear];
-    [MLN_KIT_INSTANCE(self.mln_luaCore) detachDialogView];
-}
-
-- (void)contentWindowClicked:(UIGestureRecognizer *)gesture
-{
-    CGPoint point = [gesture locationInView:self];
-    if (!self.cancelable || (self.cancelable && [self isTouchPointInSubviews:point]))
-        return;
-    [self _dismissDialogView];
 }
 
 - (BOOL)isTouchPointInSubviews:(CGPoint)pt
@@ -248,6 +245,15 @@
     }
 }
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [super touchesBegan:touches withEvent:event];
+    CGPoint point = [[touches anyObject] locationInView:self];
+    if (!self.cancelable || (self.cancelable && [self isTouchPointInSubviews:point]))
+        return;
+    [self _dismissDialogView];
+}
+
 #pragma mark - getter
 - (UIWindow *)contentWindow
 {
@@ -257,8 +263,6 @@
         [_contentWindow addSubview:self];
         _contentWindow.windowLevel = UIWindowLevelAlert - 10;
         _contentWindow.layer.masksToBounds = YES;
-        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(contentWindowClicked:)];
-        [_contentWindow addGestureRecognizer:tapGesture];
     }
     return _contentWindow;
 }
@@ -267,6 +271,7 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[MLNWindowContext sharedContext] removeWithWindow:_contentWindow];
 }
 
 #pragma mark - Export For Lua
