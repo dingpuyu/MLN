@@ -14,6 +14,7 @@
 #define kStatusBarBusyHeight 40.f
 #define kIphoneXStatusBarDefaultHeight 44.f
 #define kIphoneXHomeIndicatorHeight 34.f
+#define kViewFrame @"frame"
 #define kViewHidden @"hidden"
 #define kViewAlpha @"alpha"
 
@@ -176,8 +177,7 @@
 #pragma mark - KVO
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
 {
-    if ((object == self.safeAreaView && [keyPath isEqualToString:kViewFrame]) ||
-        (object == self.navigationBar && ([keyPath isEqualToString:kViewFrame] ||
+    if ((object == self.navigationBar && ([keyPath isEqualToString:kViewFrame] ||
                                           [keyPath isEqualToString:kViewHidden] ||
                                           [keyPath isEqualToString:kViewAlpha]))) {
         [self resestSafeAreaInsets];

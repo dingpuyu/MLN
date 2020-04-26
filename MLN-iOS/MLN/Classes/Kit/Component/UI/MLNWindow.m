@@ -48,7 +48,6 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [self removeObserver:self.safeAreaProxy forKeyPath:kViewFrame];
 }
 
 #pragma mark - Notification
@@ -64,7 +63,6 @@
     // Safe Area
     UINavigationBar *navbar = MLN_KIT_INSTANCE(self.mln_luaCore).viewController.navigationController.navigationBar;
     self.safeAreaProxy = [[MLNSafeAreaProxy alloc] initWithSafeAreaView:self navigationBar:navbar viewController:MLN_KIT_INSTANCE(self.mln_luaCore).viewController];
-    [self addObserver:self.safeAreaProxy forKeyPath:kViewFrame options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
 }
 
 - (void)enterForground:(NSNotification *)notification
@@ -320,6 +318,7 @@
     BOOL isSizeChange = !CGSizeEqualToSize(self.frame.size, frame.size);
     [super setFrame:frame];
     if (isSizeChange) {
+        [self.safeAreaProxy resestSafeAreaInsets];
         MLNLayoutNode *node = self.lua_node;
         [node changeWidth:frame.size.width];
         [node changeHeight:frame.size.height];
