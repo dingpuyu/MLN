@@ -66,12 +66,13 @@
 
 - (void)setupBreakMode
 {
-    if (self.innerLabel.numberOfLines == 1) {
-        self.innerLabel.lineBreakMode  = self.labelBreakMode;
-    } else if(self.innerLabel.numberOfLines != 0 && (self.labelBreakMode == NSLineBreakByTruncatingTail || self.labelBreakMode == NSLineBreakByClipping)){
-        self.innerLabel.lineBreakMode = self.labelBreakMode;
+    if(self.innerLabel.numberOfLines != 1 &&
+              (self.labelBreakMode == NSLineBreakByTruncatingHead ||
+               self.labelBreakMode == NSLineBreakByTruncatingMiddle ||
+               self.labelBreakMode == NSLineBreakByTruncatingTail)){
+        self.innerLabel.lineBreakMode = NSLineBreakByCharWrapping;
     } else {
-        self.innerLabel.lineBreakMode = NSLineBreakByClipping;
+        self.innerLabel.lineBreakMode = self.labelBreakMode;
     }
 }
 
